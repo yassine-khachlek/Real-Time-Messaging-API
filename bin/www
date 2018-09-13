@@ -5,6 +5,7 @@
  */
 
 require('dotenv').config()
+const auth = require('../middlewares/auth.js')
 
 process.env.NODE_ENV = process.env.NODE_ENV === 'test' ? 'test' : process.env.APP_ENV
 
@@ -31,24 +32,19 @@ var io = require('socket.io')(server);
 
 app.set('io', io);
 
-io.use(function(socket, next){
-  if (socket.handshake.query && socket.handshake.query.token){
-    jwt.verify(socket.handshake.query.token, process.env.JWT_KEY, function(err, decoded) {
-      socket.decoded = decoded;
-      next();
-    });
-  } else {
-    next();
-  }
-})
+io.use(auth.socket)
 
 io.on('connection', function(socket){
 
   if (! socket.decoded || ! socket.decoded._id){
 
-    socket.emit('event', {
-      name: 'authenticate',
-      status: 'unauthorized'
+    socket.emit('*', {
+      name: 'auth.login',
+      status: 401,
+      errors: [{
+        status: 401,
+        title: 'unauthorized'
+      }]
     })
 
     socket.disconnect()
@@ -56,12 +52,10 @@ io.on('connection', function(socket){
 
   socket.join(socket.decoded._id);
 
-  socket.emit('event', {
-    name: 'authenticate',
-    status: 'authorized',
-    data: {
-      user: socket.decoded
-    }
+  socket.emit('*', {
+    name: 'auth.login',
+    status: 200,
+    data: socket.decoded
   })
 
   socket.on('disconnect', function(){

@@ -25,6 +25,14 @@ router.get('/', function (req, res, next) {
         })
       }
 
+      files = files.map(function (file) {
+        return {
+          type: 'files',
+          id: file._id,
+          attributes: file
+        }
+      })
+
       return res.json({
         data: files
       })
@@ -67,12 +75,27 @@ router.get('/:id', function (req, res, next) {
     }
 
     return res.json({
-      data: file
+      data: {
+        type: 'files',
+        id: file._id,
+        attributes: file
+      }
     })
   })
 })
 
 router.get('/:id/:name', function (req, res, next) {
+  if (!ObjectId.isValid(req.params.id)) {
+    return res.status(400).send({
+      errors: [
+        {
+          status: 400,
+          title: 'Bad Request'
+        }
+      ]
+    })
+  }
+
   fileModel.findById(new ObjectId(req.params.id), function (err, file) {
     if (err) {
       return res.status(500).send({
@@ -168,8 +191,12 @@ router.post('/', function (req, res, next) {
           })
         }
 
-        res.json({
-          data: file
+        return res.json({
+          data: {
+            type: 'files',
+            id: file._id,
+            attributes: file
+          }
         })
       })
     })
@@ -230,7 +257,11 @@ router.delete('/:id', function (req, res, next) {
       }
 
       return res.json({
-        data: file
+        data: {
+          type: 'files',
+          id: file._id,
+          attributes: file
+        }
       })
     })
   })

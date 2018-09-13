@@ -36,5 +36,16 @@ passport.use(new BearerStrategy((token, done) => {
 
 module.exports = {
   authenticate: passport.authenticate('local', { session: false }),
-  check: passport.authenticate('bearer', { session: false })
+  check: passport.authenticate('bearer', { session: false }),
+  socket: function (socket, next) {
+    if (socket.handshake.query && socket.handshake.query.token) {
+      jwt.verify(socket.handshake.query.token, process.env.JWT_KEY, function (err, decoded) {
+        if (err) return next(err)
+        socket.decoded = decoded
+        next()
+      })
+    } else {
+      next()
+    }
+  }
 }

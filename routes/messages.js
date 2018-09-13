@@ -12,19 +12,77 @@ router.get('/', function (req, res, next) {
     .skip(((req.query.page || 1) * 10) - 10)
     .limit(10)
     .exec(function (err, messages) {
-      if (err) throw new Error(err)
-      return res.json(messages)
+      if (err) {
+        return res.status(500).send({
+          errors: [
+            {
+              status: 500,
+              title: 'Internal Server Error'
+            }
+          ]
+        })
+      }
+
+      messages = messages.map(function (message) {
+        return {
+          type: 'messages',
+          id: message._id,
+          attributes: message
+        }
+      })
+
+      return res.json({
+        data: messages
+      })
     })
 })
 
 /* GET message */
 router.get('/:id', function (req, res, next) {
+  if (!ObjectId.isValid(req.params.id)) {
+    return res.status(400).send({
+      errors: [
+        {
+          status: 400,
+          title: 'Bad Request'
+        }
+      ]
+    })
+  }
+
   messageModel
     .findById(new ObjectId(req.params.id))
     .populate(['sender', 'receiver'])
     .exec(function (err, message) {
-      if (err) throw new Error(err)
-      return res.json(message)
+      if (err) {
+        return res.status(500).send({
+          errors: [
+            {
+              status: 500,
+              title: 'Internal Server Error'
+            }
+          ]
+        })
+      }
+
+      if (!message) {
+        return res.status(400).send({
+          errors: [
+            {
+              status: 400,
+              title: 'Bad Request'
+            }
+          ]
+        })
+      }
+
+      return res.json({
+        data: {
+          type: 'messages',
+          id: message._id,
+          attributes: message
+        }
+      })
     })
 })
 
@@ -37,23 +95,80 @@ router.post('/', function (req, res, next) {
   }
 
   messageModel.create(messageData, function (err, message) {
-    if (err) throw new Error(err)
-    req.app.get('io').to(messageData.receiver).emit('event', {
-      name: 'message.create',
-      status: 'created',
+    if (err) {
+      return res.status(500).send({
+        errors: [
+          {
+            status: 500,
+            title: 'Internal Server Error'
+          }
+        ]
+      })
+    }
+
+    req.app.get('io').to(messageData.receiver).emit('*', {
+      name: 'messages.create',
+      status: 200,
       data: {
-        message: message
+        type: 'messages',
+        id: message._id,
+        attributes: message
       }
     })
-    return res.json(message)
+
+    return res.json({
+      data: {
+        type: 'messages',
+        id: message._id,
+        attributes: message
+      }
+    })
   })
 })
 
 /* DELETE message */
 router.delete('/:id', function (req, res, next) {
+  if (!ObjectId.isValid(req.params.id)) {
+    return res.status(400).send({
+      errors: [
+        {
+          status: 400,
+          title: 'Bad Request'
+        }
+      ]
+    })
+  }
+
   messageModel.findByIdAndRemove(new ObjectId(req.params.id), function (err, message) {
-    if (err) throw new Error(err)
-    return res.json(message)
+    if (err) {
+      return res.status(500).send({
+        errors: [
+          {
+            status: 500,
+            title: 'Internal Server Error'
+          }
+        ]
+      })
+    }
+
+    if (!message) {
+      return res.status(400).send({
+        errors: [
+          {
+            status: 400,
+            title: 'Bad Request'
+          }
+        ]
+      })
+    }
+
+    return res.json({
+      data: {
+        type: 'messages',
+        id: message._id,
+        attributes: message
+      }
+    })
   })
 })
 
