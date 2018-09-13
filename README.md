@@ -68,11 +68,17 @@ Run
 $ npm start
 ```
 
-Check the {APP_URL} in your brower:
+Open http://127.0.0.1:5098 in your browser, you should get the api response like to follow:
 
-```text
-[http://127.0.0.1:5098](http://127.0.0.1:5098 "")
+```json
+{"jsonapi":{"version":"1.0"},...}
 ```
+
+## Continuous Deployment with Bitbucket Pipelines
+
+	1 -Build the application.
+	2- Run tests on the build.
+	3- Deploy to production.
 
 ## Author
 
