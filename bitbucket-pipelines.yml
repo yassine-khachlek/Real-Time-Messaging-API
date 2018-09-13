@@ -13,7 +13,7 @@ pipelines:
             - mongo
     master:
       - step:
-          name: Build and test 
+          name: Build and test
           image: node:8.11.4
           script:
             - mv .env.example .env
