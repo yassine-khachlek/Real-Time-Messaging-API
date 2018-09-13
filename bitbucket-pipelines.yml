@@ -1,15 +1,16 @@
 pipelines:
-  default:
-    - step:
-        name: Build and test
-        image: node:8.11.4
-        script:
-          - mv .env.example .env
-          - npm install
-          - ./node_modules/mocha/bin/mocha --reporter mocha-junit-reporter --reporter-options mochaFile=./test-reports/junit.xml
-        services:
-          - mongo
   branches:
+    test:
+      - step:
+          name: Build and test 
+          deployment: test
+          image: node:8.11.4
+          script:
+            - mv .env.example .env
+            - npm install
+            - ./node_modules/mocha/bin/mocha --reporter mocha-junit-reporter --reporter-options mochaFile=./test-reports/junit.xml
+          services:
+            - mongo
     master:
       - step:
           name: Build and test 
