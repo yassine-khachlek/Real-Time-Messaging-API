@@ -14,16 +14,87 @@ router.get('/', function (req, res, next) {
     .skip(((req.query.page || 1) * 10) - 10)
     .limit(10)
     .exec(function (err, files) {
-      if (err) throw new Error(err)
-      return res.json(files)
+      if (err) {
+        return res.status(500).send({
+          errors: [
+            {
+              status: 500,
+              title: 'Internal Server Error'
+            }
+          ]
+        })
+      }
+
+      return res.json({
+        data: files
+      })
     })
 })
 
 /* GET file */
-router.get('/:id/:key?', function (req, res, next) {
+router.get('/:id', function (req, res, next) {
+  if (!ObjectId.isValid(req.params.id)) {
+    return res.status(400).send({
+      errors: [
+        {
+          status: 400,
+          title: 'Bad Request'
+        }
+      ]
+    })
+  }
   fileModel.findById(new ObjectId(req.params.id), function (err, file) {
-    if (err) return res.status(500).json({ error: err })
-    if (!file) return res.status(500).json({ error: err })
+    if (err) {
+      return res.status(500).send({
+        errors: [
+          {
+            status: 500,
+            title: 'Internal Server Error'
+          }
+        ]
+      })
+    }
+
+    if (!file) {
+      return res.status(400).send({
+        errors: [
+          {
+            status: 400,
+            title: 'Bad Request'
+          }
+        ]
+      })
+    }
+
+    return res.json({
+      data: file
+    })
+  })
+})
+
+router.get('/:id/:name', function (req, res, next) {
+  fileModel.findById(new ObjectId(req.params.id), function (err, file) {
+    if (err) {
+      return res.status(500).send({
+        errors: [
+          {
+            status: 500,
+            title: 'Internal Server Error'
+          }
+        ]
+      })
+    }
+
+    if (!file) {
+      return res.status(400).send({
+        errors: [
+          {
+            status: 400,
+            title: 'Bad Request'
+          }
+        ]
+      })
+    }
 
     var filePath = path.join(__dirname, '/..', '/storage/files/', file._id.toString())
 
@@ -45,7 +116,27 @@ router.post('/', function (req, res, next) {
   form.uploadDir = uploadDir
 
   form.parse(req, (err, fields, files) => {
-    if (err) throw new Error(err)
+    if (err) {
+      return res.status(500).send({
+        errors: [
+          {
+            status: 500,
+            title: 'Internal Server Error'
+          }
+        ]
+      })
+    }
+
+    if (!files.file) {
+      return res.status(400).send({
+        errors: [
+          {
+            status: 400,
+            title: 'Bad Request'
+          }
+        ]
+      })
+    }
 
     var fileData = {
       name: files.file.name,
@@ -55,13 +146,32 @@ router.post('/', function (req, res, next) {
 
     fileModel.create(fileData, function (err, file) {
       if (err) {
-        if (err) throw new Error(err)
-      } else {
-        fs.rename(files.file.path, path.join(__dirname, '/..', '/storage/files/', file._id.toString()), function (err) {
-          if (err) throw new Error(err)
-          res.json(file)
+        return res.status(500).send({
+          errors: [
+            {
+              status: 500,
+              title: 'Internal Server Error'
+            }
+          ]
         })
       }
+
+      fs.rename(files.file.path, path.join(__dirname, '/..', '/storage/files/', file._id.toString()), function (err) {
+        if (err) {
+          return res.status(500).send({
+            errors: [
+              {
+                status: 500,
+                title: 'Internal Server Error'
+              }
+            ]
+          })
+        }
+
+        res.json({
+          data: file
+        })
+      })
     })
   })
 
@@ -73,14 +183,55 @@ router.post('/', function (req, res, next) {
 
 /* DELETE file */
 router.delete('/:id', function (req, res, next) {
+  if (!ObjectId.isValid(req.params.id)) {
+    return res.status(400).send({
+      errors: [
+        {
+          status: 400,
+          title: 'Bad Request'
+        }
+      ]
+    })
+  }
+
   fileModel.findByIdAndRemove(new ObjectId(req.params.id), function (err, file) {
-    if (err) return res.status(500).json({ error: err })
-    if (!file) return res.status(500).json({ error: err })
+    if (err) {
+      return res.status(500).send({
+        errors: [
+          {
+            status: 500,
+            title: 'Internal Server Error'
+          }
+        ]
+      })
+    }
+
+    if (!file) {
+      return res.status(400).send({
+        errors: [
+          {
+            status: 400,
+            title: 'Bad Request'
+          }
+        ]
+      })
+    }
 
     fs.unlink(path.join(__dirname, '/..', '/storage/files/', file._id.toString()), function (err) {
-      if (err) return res.status(500).json({ error: err })
+      if (err) {
+        return res.status(500).send({
+          errors: [
+            {
+              status: 500,
+              title: 'Internal Server Error'
+            }
+          ]
+        })
+      }
 
-      return res.json(file)
+      return res.json({
+        data: file
+      })
     })
   })
 })
