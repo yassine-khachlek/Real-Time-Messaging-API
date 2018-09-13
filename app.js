@@ -9,8 +9,11 @@ var usersRouter = require('./routes/users')
 var messagesRouter = require('./routes/messages')
 var filesRouter = require('./routes/files')
 var authRouter = require('./routes/auth')
+var docsRouter = require('./routes/docs')
 
 var app = express()
+
+app.set('view engine', 'ejs')
 
 if (process.env.NODE_ENV !== 'test') {
   app.use(logger(process.env.LOG_FORMAT))
@@ -25,6 +28,7 @@ app.use('/users', usersRouter)
 app.use('/messages', messagesRouter)
 app.use('/files', filesRouter)
 app.use('/auth', authRouter)
+app.use('/docs', docsRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
