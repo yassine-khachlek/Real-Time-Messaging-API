@@ -43,7 +43,7 @@ $ mv .env.example .env
 
 Update the configuration file with your server information
 
-```file
+```text
 APP_NAME="Real Time Messaging API"
 APP_ENV=development
 APP_PORT=5098
@@ -70,8 +70,8 @@ $ npm start
 
 Check the {APP_URL} in your brower:
 
-```link
-[http://127.0.0.1:5098] (http://127.0.0.1:5098){target="_blank"}
+```text
+[http://127.0.0.1:5098](http://127.0.0.1:5098 "")
 ```
 
 ## Author
