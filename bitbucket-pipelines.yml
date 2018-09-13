@@ -1,0 +1,35 @@
+pipelines:
+  default:
+    - step:
+        name: Build and test
+        image: node:8.11.4
+        script:
+          - mv .env.example .env
+          - npm install
+          - ./node_modules/mocha/bin/mocha --reporter mocha-junit-reporter --reporter-options mochaFile=./test-reports/junit.xml
+        services:
+          - mongo
+  branches:
+    master:
+      - step:
+          name: Build and test 
+          image: node:8.11.4
+          script:
+            - mv .env.example .env
+            - npm install
+            - ./node_modules/mocha/bin/mocha --reporter mocha-junit-reporter --reporter-options mochaFile=./test-reports/junit.xml
+          services:
+            - mongo
+      - step:
+          name: Deploy to production
+          deployment: production
+          script:
+            - cat ./deploy.sh | ssh adminubuntu@137.117.181.38
+
+definitions: 
+  services: 
+    mongo: 
+      image: mongo:4.0.2
+      environment:
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: secret
