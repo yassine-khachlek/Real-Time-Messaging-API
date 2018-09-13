@@ -2,6 +2,9 @@ const express = require('express')
 const router = express.Router()
 const ObjectId = require('mongodb').ObjectID
 const messageModel = require('../models/messages.js')
+const auth = require('../middlewares/auth.js')
+
+router.use(auth.check)
 
 /* GET messages */
 router.get('/', function (req, res, next) {
