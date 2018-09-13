@@ -2,12 +2,12 @@ const assert = require('assert')
 const request = require('superagent')
 const faker = require('faker')
 const io = require('socket.io-client')
+const ObjectId = require('mongodb').ObjectID
 
 var users = global.users
+var messages = global.messages
 
 describe('MessageCRUD', function () {
-  var message
-
   var ioClientOptions
 
   before(function () {
@@ -25,14 +25,21 @@ describe('MessageCRUD', function () {
       var ioClient = io.connect(process.env.APP_URL, ioClientOptions)
 
       ioClient.once('connect', function () {
-        ioClient.on('event', function (eventData) {
-          if (eventData.name === 'authenticate') {
-            assert.strictEqual(eventData.status, 'authorized')
-            assert.strictEqual(eventData.data.user._id, users[1]._id)
+        ioClient.on('*', function (eventData) {
+          if (eventData.name === 'auth.login') {
+            assert.strictEqual(eventData.status, 200)
+            assert.strictEqual(eventData.data._id, users[1]._id)
           }
-          if (eventData.name === 'message.create') {
-            assert.strictEqual(eventData.status, 'created')
-            assert.ok(eventData.data.message._id)
+          if (eventData.name === 'messages.create') {
+            assert.strictEqual(eventData.status, 200)
+            assert.ok(eventData.data instanceof Object)
+            assert.ok(!Array.isArray(eventData.data))
+            assert.strictEqual(eventData.data.type, 'messages')
+            assert.ok(eventData.data.id)
+            assert.ok(ObjectId.isValid(eventData.data.id))
+            assert.ok(eventData.data.attributes)
+            assert.ok(eventData.data.attributes._id)
+            assert.ok(ObjectId.isValid(eventData.data.attributes._id))
             done()
           }
         })
@@ -49,8 +56,15 @@ describe('MessageCRUD', function () {
         .end((err, res) => {
           if (err) done(err)
           assert.strictEqual(res.status, 200)
-          assert.ok(res.body._id)
-          message = res.body
+          assert.ok(res.body.data instanceof Object)
+          assert.ok(!Array.isArray(res.body.data))
+          assert.strictEqual(res.body.data.type, 'messages')
+          assert.ok(res.body.data.id)
+          assert.ok(ObjectId.isValid(res.body.data.id))
+          assert.ok(res.body.data.attributes)
+          assert.ok(res.body.data.attributes._id)
+          assert.ok(ObjectId.isValid(res.body.data.attributes._id))
+          messages.push(res.body.data.attributes)
         })
     } catch (e) {
       done(e)
@@ -60,12 +74,19 @@ describe('MessageCRUD', function () {
   it('Read', done => {
     try {
       request
-        .get(process.env.APP_URL + '/messages/' + message._id)
+        .get(process.env.APP_URL + '/messages/' + messages[messages.length - 1]._id)
         .set('Authorization', 'bearer ' + users[0].token)
         .end((err, res) => {
           if (err) done(err)
           assert.strictEqual(res.status, 200)
-          assert.ok(res.body._id)
+          assert.ok(res.body.data instanceof Object)
+          assert.ok(!Array.isArray(res.body.data))
+          assert.strictEqual(res.body.data.type, 'messages')
+          assert.ok(res.body.data.id)
+          assert.ok(ObjectId.isValid(res.body.data.id))
+          assert.ok(res.body.data.attributes)
+          assert.ok(res.body.data.attributes._id)
+          assert.ok(ObjectId.isValid(res.body.data.attributes._id))
           done()
         })
     } catch (e) {
@@ -76,12 +97,20 @@ describe('MessageCRUD', function () {
   it('Delete', done => {
     try {
       request
-        .delete(process.env.APP_URL + '/messages/' + message._id)
+        .delete(process.env.APP_URL + '/messages/' + messages[messages.length - 1]._id)
         .set('Authorization', 'bearer ' + users[0].token)
         .end((err, res) => {
           if (err) done(err)
           assert.strictEqual(res.status, 200)
-          assert.ok(res.body._id)
+          assert.ok(res.body.data instanceof Object)
+          assert.ok(!Array.isArray(res.body.data))
+          assert.strictEqual(res.body.data.type, 'messages')
+          assert.ok(res.body.data.id)
+          assert.ok(ObjectId.isValid(res.body.data.id))
+          assert.ok(res.body.data.attributes)
+          assert.ok(res.body.data.attributes._id)
+          assert.ok(ObjectId.isValid(res.body.data.attributes._id))
+          messages.pop()
           done()
         })
     } catch (e) {
@@ -97,6 +126,8 @@ describe('MessageCRUD', function () {
         .end((err, res) => {
           if (err) done(err)
           assert.strictEqual(res.status, 200)
+          assert.ok(res.body.data instanceof Object)
+          assert.ok(Array.isArray(res.body.data))
           done()
         })
     } catch (e) {

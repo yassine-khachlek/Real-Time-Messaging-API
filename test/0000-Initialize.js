@@ -3,6 +3,8 @@ const faker = require('faker')
 process.env.NODE_ENV = 'test'
 
 global.users = []
+global.files = []
+global.messages = []
 
 for (var i = 0; i < 3; i++) {
   global.users.push({

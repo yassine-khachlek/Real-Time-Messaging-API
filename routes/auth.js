@@ -15,18 +15,48 @@ router.post('/register', function (req, res, next) {
   }
 
   userModel.create(userData, function (err, user) {
-    if (err) throw new Error(err)
-    return res.json(user)
+    if (err) {
+      return res.status(500).send({
+        errors: [
+          {
+            status: 500,
+            title: 'Internal Server Error'
+          }
+        ]
+      })
+    }
+
+    return res.json({
+      data: {
+        type: 'users',
+        id: user._id,
+        attributes: user
+      }
+    })
   })
 })
 
 /* POST auth login */
 router.post('/login', auth.authenticate, (req, res) => {
-  res.json({ token: req.user })
+  res.json({
+    status: 200,
+    data: {
+      type: 'tokens',
+      attributes: {
+        value: req.user
+      }
+    }
+  })
 })
 
 router.get('/token/verify', auth.check, (req, res) => {
-  res.json(req.user)
+  res.json({
+    data: {
+      type: 'users',
+      id: req.user._id,
+      attributes: req.user
+    }
+  })
 })
 
 module.exports = router

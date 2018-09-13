@@ -20,10 +20,10 @@ describe('WebSocketAuthentication', function () {
     var ioClient = io.connect(process.env.APP_URL, ioClientOptions)
 
     ioClient.once('connect', function () {
-      ioClient.once('event', function (eventData) {
-        assert.strictEqual(eventData.name, 'authenticate')
-        assert.strictEqual(eventData.status, 'authorized')
-        assert.strictEqual(eventData.data.user._id, users[0]._id)
+      ioClient.once('*', function (eventData) {
+        assert.strictEqual(eventData.name, 'auth.login')
+        assert.strictEqual(eventData.status, 200)
+        assert.strictEqual(eventData.data._id, users[0]._id)
 
         ioClient.disconnect()
         done()

@@ -14,24 +14,120 @@ router.get('/', function (req, res, next) {
     .skip(((req.query.page || 1) * 10) - 10)
     .limit(10)
     .exec(function (err, users) {
-      if (err) throw new Error(err)
-      return res.json(users)
+      if (err) {
+        return res.status(500).send({
+          errors: [
+            {
+              status: 500,
+              title: 'Internal Server Error'
+            }
+          ]
+        })
+      }
+
+      users = users.map(function (user) {
+        return {
+          type: 'users',
+          id: user._id,
+          attributes: user
+        }
+      })
+
+      return res.json({
+        data: users
+      })
     })
 })
 
 /* GET user */
 router.get('/:id', function (req, res, next) {
+  if (!ObjectId.isValid(req.params.id)) {
+    return res.status(400).send({
+      errors: [
+        {
+          status: 400,
+          title: 'Bad Request'
+        }
+      ]
+    })
+  }
+
   userModel.findById(new ObjectId(req.params.id), function (err, user) {
-    if (err) throw new Error(err)
-    return res.json(user)
+    if (err) {
+      return res.status(500).send({
+        errors: [
+          {
+            status: 500,
+            title: 'Internal Server Error'
+          }
+        ]
+      })
+    }
+
+    if (!user) {
+      return res.status(400).send({
+        errors: [
+          {
+            status: 400,
+            title: 'Bad Request'
+          }
+        ]
+      })
+    }
+
+    return res.json({
+      data: {
+        type: 'users',
+        id: user._id,
+        attributes: user
+      }
+    })
   })
 })
 
 /* DELETE user */
 router.delete('/:id', function (req, res, next) {
+  if (!ObjectId.isValid(req.params.id)) {
+    return res.status(400).send({
+      errors: [
+        {
+          status: 400,
+          title: 'Bad Request'
+        }
+      ]
+    })
+  }
+
   userModel.findByIdAndRemove(new ObjectId(req.params.id), function (err, user) {
-    if (err) throw new Error(err)
-    return res.json(user)
+    if (err) {
+      return res.status(500).send({
+        errors: [
+          {
+            status: 500,
+            title: 'Internal Server Error'
+          }
+        ]
+      })
+    }
+
+    if (!user) {
+      return res.status(400).send({
+        errors: [
+          {
+            status: 400,
+            title: 'Bad Request'
+          }
+        ]
+      })
+    }
+
+    return res.json({
+      data: {
+        type: 'users',
+        id: user._id,
+        attributes: user
+      }
+    })
   })
 })
 
