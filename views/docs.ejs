@@ -13,72 +13,126 @@
 
     <!-- Custom styles for this template -->
     <link href="/stylesheets/style.css" rel="stylesheet">
+
+    <style type="text/css">
+      pre {
+        padding-top: 20px;
+      }
+    </style>
   </head>
 
   <body>
 
     <main role="main" class="container">
 
-      
       <h1><%= title %></h1>
-      <% endpoints.forEach(function(endpoint){ %>
+      <% groups.forEach(function(group){ %>
       <table class="table table-bordered">
         <tr>
           <th>
-            <%- endpoint.name.toUpperCase() %>
+            <%- group.name.toUpperCase() %>
           </th>
         </tr>
         <tr>
           <td>
-            <% endpoint.endpoints.forEach(function(endpoint){ %>
+            <% group.endpoints.forEach(function(endpoint){ %>
             <table class="table table-bordered">
               <tr>
-                <th colspan="2">
-                  <%- endpoint.name.toUpperCase() %>
-                </th>
-              </tr>
-              <tr>
-                <td style="width: 60px;">
-                  <%- endpoint.method.toUpperCase() %>
+                <td style="width: 80px;" class="<% if (endpoint.method == 'GET') { %>table-primary<% } %><% if (endpoint.method == 'POST') { %>table-warning<% } %><% if (endpoint.method == 'DELETE') { %>table-danger<% } %>">
+                  <%- endpoint.method %>
                 </td>
                 <td>
-                  <%- endpoint.url %>
+                  <%= endpoint.name.toUpperCase() %>
                 </td>
               </tr>
-              <% if (endpoint.params && endpoint.params.length) { %>
               <tr>
                 <td colspan="2">
-                  <table class="table table-bordered">
-                    <tr>
-                      <th>
-                        Name
-                      </th>
-                      <th>
-                        Type
-                      </th>
-                      <th>
-                        Description
-                      </th>
-                    </tr>
-                    <% endpoint.params.forEach(function(param){ %>
-                    <tr>
-                      <td>
-                        <%- param.name %>
-                        <% if (endpoint.params && endpoint.params.length) { %>
-                        <font color="red">*</font>
-                        <% } %>    
-                      </td>
-                      <td>
-                        <%- param.type %>
-                      </td>
-                      <td>
-                        <%- param.description %>
-                      </td>
-                    </tr>
-                    <% }); %>
-                  </table>
+                  <%= app_url %> <%= endpoint.url %>
                 </td>
               </tr>
+              <% if (endpoint.headers && endpoint.headers.length) { %>
+                <tr>
+                  <td colspan="2">
+                    <table class="table table-bordered">
+                      <tr>
+                        <th>
+                          Name
+                        </th>
+                        <th>
+                          Type
+                        </th>
+                        <th>
+                          Description
+                        </th>
+                      </tr>
+                      <% endpoint.headers.forEach(function(header){ %>
+                      <tr>
+                        <td>
+                          <%= header.name %>
+                          <% if (header.required) { %>
+                          <font color="red">*</font>
+                          <% } %>    
+                        </td>
+                        <td>
+                          <%= header.type %>
+                        </td>
+                        <td>
+                          <%= header.description %>
+                        </td>
+                      </tr>
+                      <% }); %>
+                    </table>
+                  </td>
+                </tr>
+              <% } %>
+              <% if (endpoint.params && endpoint.params.length) { %>
+                <tr>
+                  <td colspan="2">
+                    <table class="table table-bordered">
+                      <tr>
+                        <th>
+                          Name
+                        </th>
+                        <th>
+                          Type
+                        </th>
+                        <th>
+                          Description
+                        </th>
+                      </tr>
+                      <% endpoint.params.forEach(function(param){ %>
+                      <tr>
+                        <td>
+                          <%= param.name %>
+                          <% if (param.required) { %>
+                          <font color="red">*</font>
+                          <% } %>    
+                        </td>
+                        <td>
+                          <%= param.type %>
+                        </td>
+                        <td>
+                          <%= param.description %>
+                        </td>
+                      </tr>
+                      <% }); %>
+                    </table>
+                  </td>
+                </tr>
+              <% } %>
+              <% if (endpoint.responses && endpoint.responses.length ) { %>
+                <% endpoint.responses.forEach(function(response){ %>
+                <tr>
+                  <td colspan="2">
+                    <strong><%= response.name %></strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <pre><%= JSON.stringify(response.value, null, 2) %></pre>              
+                  </td>
+                </tr>
+                <% }) %>
               <% } %>
             </table>
             <% }); %>
