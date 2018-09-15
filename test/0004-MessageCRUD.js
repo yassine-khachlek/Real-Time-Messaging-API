@@ -28,7 +28,7 @@ describe('MessageCRUD', function () {
         ioClient.on('*', function (eventData) {
           if (eventData.name === 'auth.login') {
             assert.strictEqual(eventData.status, 200)
-            assert.strictEqual(eventData.data._id, users[1]._id)
+            assert.strictEqual(eventData.data.id, users[1]._id)
           }
           if (eventData.name === 'messages.create') {
             assert.strictEqual(eventData.status, 200)
