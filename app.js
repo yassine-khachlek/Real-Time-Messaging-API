@@ -2,6 +2,7 @@ var createError = require('http-errors')
 var express = require('express')
 var path = require('path')
 var logger = require('./middlewares/logger')
+const cors = require('./middlewares/cors.js')
 require('./modules/database.js')
 
 var indexRouter = require('./routes/index')
@@ -12,6 +13,8 @@ var authRouter = require('./routes/auth')
 var docsRouter = require('./routes/docs')
 
 var app = express()
+
+app.use(cors)
 
 app.set('view engine', 'ejs')
 
