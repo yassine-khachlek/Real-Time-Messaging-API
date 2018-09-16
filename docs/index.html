@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -6,15 +7,21 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Real Time Messaging API</title>
+    <title></title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <!-- Custom styles for this template -->
-    <link href="/stylesheets/style.css" rel="stylesheet">
-
     <style type="text/css">
+      body {
+        padding: 50px;
+        font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+      }
+
+      a {
+        color: #00B7FF;
+      }
+
       pre {
         padding-top: 20px;
       }
@@ -24,34 +31,72 @@
   <body>
 
     <main role="main" class="container">
+      
+      <h1>Real Time Messaging Api</h1>
+      
 
-      <h1>Documentations</h1>
+      <p>
+      
+      <strong>Project repository:</strong> <a href="https://github.com/yassine-khachlek/real-time-messaging-api" target="_blank">https://github.com/yassine-khachlek/real-time-messaging-api</a>
+              
+      </p>
+
+      <ul>
+        
+        <li>
+          <a href="#AUTHENTICATION">AUTHENTICATION</a>
+        </li>
+        
+        <li>
+          <a href="#FILES">FILES</a>
+        </li>
+        
+        <li>
+          <a href="#MESSAGES">MESSAGES</a>
+        </li>
+        
+        <li>
+          <a href="#SOCKET.IO">SOCKET.IO</a>
+        </li>
+        
+      </ul>
+
       
       <table class="table table-bordered">
+        
         <tr>
-          <th>
+          <th id="AUTHENTICATION">
             AUTHENTICATION
           </th>
         </tr>
+        
         <tr>
           <td>
             
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped">
               <tr>
                 <td style="width: 80px;" class="table-warning">
                   POST
                 </td>
                 <td>
-                  REGISTER
+                  register
                 </td>
               </tr>
+              
               <tr>
                 <td colspan="2">
-                  http://137.117.181.38:5098 /auth/register
+                  http://127.0.0.1:5098/auth/register
                 </td>
               </tr>
               
               
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Body
+                  </th>
+                </tr>
                 <tr>
                   <td colspan="2">
                     <table class="table table-bordered">
@@ -112,9 +157,23 @@
                         </td>
                       </tr>
                       
+                      <tr>
+                        <td>
+                          picture
+                              
+                        </td>
+                        <td>
+                          String
+                        </td>
+                        <td>
+                          The picture file id
+                        </td>
+                      </tr>
+                      
                     </table>
                   </td>
                 </tr>
+              
               
               
                 
@@ -128,15 +187,15 @@
                     <pre>{
   &#34;data&#34;: {
     &#34;type&#34;: &#34;users&#34;,
-    &#34;id&#34;: &#34;5b9b8f2cc3ac3343e4f1db33&#34;,
+    &#34;id&#34;: &#34;5b9d23422be61559c6486ee1&#34;,
     &#34;attributes&#34;: {
       &#34;picture&#34;: null,
-      &#34;_id&#34;: &#34;5b9b8f2cc3ac3343e4f1db33&#34;,
-      &#34;name&#34;: &#34;Yassine Khachlek&#34;,
-      &#34;email&#34;: &#34;yassine.khachlek@gmail.comx&#34;,
+      &#34;_id&#34;: &#34;5b9d23422be61559c6486ee1&#34;,
+      &#34;name&#34;: &#34;User 1&#34;,
+      &#34;email&#34;: &#34;user1@gmail.com&#34;,
       &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
-      &#34;created_at&#34;: &#34;2018-09-14T10:36:28.019Z&#34;,
-      &#34;updated_at&#34;: &#34;2018-09-14T10:36:28.019Z&#34;,
+      &#34;created_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+      &#34;updated_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
       &#34;__v&#34;: 0
     }
   }
@@ -147,22 +206,30 @@
               
             </table>
             
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped">
               <tr>
                 <td style="width: 80px;" class="table-warning">
                   POST
                 </td>
                 <td>
-                  LOGIN
+                  login
                 </td>
               </tr>
+              
               <tr>
                 <td colspan="2">
-                  http://137.117.181.38:5098 /auth/login
+                  http://127.0.0.1:5098/auth/login
                 </td>
               </tr>
               
               
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Body
+                  </th>
+                </tr>
                 <tr>
                   <td colspan="2">
                     <table class="table table-bordered">
@@ -213,6 +280,7 @@
                 </tr>
               
               
+              
                 
                 <tr>
                   <td colspan="2">
@@ -236,21 +304,29 @@
               
             </table>
             
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped">
               <tr>
                 <td style="width: 80px;" class="table-primary">
                   GET
                 </td>
                 <td>
-                  TOKEN VERIFY
-                </td>
-              </tr>
-              <tr>
-                <td colspan="2">
-                  http://137.117.181.38:5098 /auth/token/verify
+                  token verify
                 </td>
               </tr>
               
+              <tr>
+                <td colspan="2">
+                  http://127.0.0.1:5098/auth/token/verify
+                </td>
+              </tr>
+              
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Headers
+                  </th>
+                </tr>
                 <tr>
                   <td colspan="2">
                     <table class="table table-bordered">
@@ -270,7 +346,7 @@
                         <td>
                           Authorization
                           
-                          <font color="red">*</font>
+                          <font color="red">* (required)</font>
                               
                         </td>
                         <td>
@@ -287,6 +363,7 @@
               
               
               
+              
                 
                 <tr>
                   <td colspan="2">
@@ -298,16 +375,16 @@
                     <pre>{
   &#34;data&#34;: {
     &#34;type&#34;: &#34;users&#34;,
-    &#34;id&#34;: &#34;5b9b816056027225afbdd746&#34;,
+    &#34;id&#34;: &#34;5b9d23422be61559c6486ee1&#34;,
     &#34;attributes&#34;: {
       &#34;picture&#34;: null,
-      &#34;_id&#34;: &#34;5b9b816056027225afbdd746&#34;,
-      &#34;name&#34;: &#34;Yassine Khachlek&#34;,
-      &#34;email&#34;: &#34;yassine.khachlek@gmail.com&#34;,
-      &#34;created_at&#34;: &#34;2018-09-14T09:37:36.653Z&#34;,
-      &#34;updated_at&#34;: &#34;2018-09-14T09:37:36.653Z&#34;,
-      &#34;iat&#34;: 1536918198,
-      &#34;exp&#34;: 1568454198
+      &#34;_id&#34;: &#34;5b9d23422be61559c6486ee1&#34;,
+      &#34;name&#34;: &#34;User 1&#34;,
+      &#34;email&#34;: &#34;user1@gmail.com&#34;,
+      &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+      &#34;created_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+      &#34;updated_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+      &#34;__v&#34;: 0
     }
   }
 }</pre>              
@@ -322,15 +399,17 @@
       </table>
       
       <table class="table table-bordered">
+        
         <tr>
-          <th>
+          <th id="FILES">
             FILES
           </th>
         </tr>
+        
         <tr>
           <td>
             
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped">
               <tr>
                 <td style="width: 80px;" class="table-primary">
                   GET
@@ -339,11 +418,15 @@
                   PAGINATE
                 </td>
               </tr>
+              
               <tr>
                 <td colspan="2">
-                  http://137.117.181.38:5098 /files
+                  http://127.0.0.1:5098/files
                 </td>
               </tr>
+              
+              
+              
               
               
               
@@ -404,7 +487,7 @@
               
             </table>
             
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped">
               <tr>
                 <td style="width: 80px;" class="table-primary">
                   GET
@@ -413,11 +496,15 @@
                   READ
                 </td>
               </tr>
+              
               <tr>
                 <td colspan="2">
-                  http://137.117.181.38:5098 /files/:id
+                  http://127.0.0.1:5098/files/id
                 </td>
               </tr>
+              
+              
+              
               
               
               
@@ -450,7 +537,7 @@
               
             </table>
             
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped">
               <tr>
                 <td style="width: 80px;" class="table-primary">
                   GET
@@ -459,13 +546,21 @@
                   SERVE
                 </td>
               </tr>
+              
               <tr>
                 <td colspan="2">
-                  http://137.117.181.38:5098 /files/:id/:name
+                  http://127.0.0.1:5098/files/id/:name
                 </td>
               </tr>
               
               
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Body
+                  </th>
+                </tr>
                 <tr>
                   <td colspan="2">
                     <table class="table table-bordered">
@@ -483,7 +578,7 @@
                       
                       <tr>
                         <td>
-                          :id
+                          id
                           
                           <font color="red">*</font>
                               
@@ -516,6 +611,7 @@
                 </tr>
               
               
+              
                 
                 <tr>
                   <td colspan="2">
@@ -531,7 +627,7 @@
               
             </table>
             
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped">
               <tr>
                 <td style="width: 80px;" class="table-warning">
                   POST
@@ -540,13 +636,21 @@
                   CREATE
                 </td>
               </tr>
+              
               <tr>
                 <td colspan="2">
-                  http://137.117.181.38:5098 /files
+                  http://127.0.0.1:5098/files
                 </td>
               </tr>
               
               
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Body
+                  </th>
+                </tr>
                 <tr>
                   <td colspan="2">
                     <table class="table table-bordered">
@@ -582,6 +686,7 @@
                 </tr>
               
               
+              
                 
                 <tr>
                   <td colspan="2">
@@ -611,7 +716,7 @@
               
             </table>
             
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped">
               <tr>
                 <td style="width: 80px;" class="table-danger">
                   DELETE
@@ -620,13 +725,21 @@
                   DELETE
                 </td>
               </tr>
+              
               <tr>
                 <td colspan="2">
-                  http://137.117.181.38:5098 /files/:id
+                  http://127.0.0.1:5098/files/id
                 </td>
               </tr>
               
               
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Body
+                  </th>
+                </tr>
                 <tr>
                   <td colspan="2">
                     <table class="table table-bordered">
@@ -644,7 +757,7 @@
                       
                       <tr>
                         <td>
-                          :id
+                          id
                           
                           <font color="red">*</font>
                               
@@ -660,6 +773,7 @@
                     </table>
                   </td>
                 </tr>
+              
               
               
                 
@@ -696,15 +810,17 @@
       </table>
       
       <table class="table table-bordered">
+        
         <tr>
-          <th>
+          <th id="MESSAGES">
             MESSAGES
           </th>
         </tr>
+        
         <tr>
           <td>
             
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped">
               <tr>
                 <td style="width: 80px;" class="table-primary">
                   GET
@@ -713,12 +829,20 @@
                   PAGINATE
                 </td>
               </tr>
+              
               <tr>
                 <td colspan="2">
-                  http://137.117.181.38:5098 /messages
+                  http://127.0.0.1:5098/messages
                 </td>
               </tr>
               
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Headers
+                  </th>
+                </tr>
                 <tr>
                   <td colspan="2">
                     <table class="table table-bordered">
@@ -738,7 +862,7 @@
                         <td>
                           Authorization
                           
-                          <font color="red">*</font>
+                          <font color="red">* (required)</font>
                               
                         </td>
                         <td>
@@ -752,6 +876,7 @@
                     </table>
                   </td>
                 </tr>
+              
               
               
               
@@ -767,40 +892,94 @@
   &#34;data&#34;: [
     {
       &#34;type&#34;: &#34;messages&#34;,
-      &#34;id&#34;: &#34;5b9a95582e2c39532c3c49f3&#34;,
+      &#34;id&#34;: &#34;5b9d25dd2be61559c6486ee3&#34;,
       &#34;attributes&#34;: {
-        &#34;_id&#34;: &#34;5b9a95582e2c39532c3c49f3&#34;,
-        &#34;sender&#34;: null,
-        &#34;receiver&#34;: null,
-        &#34;content&#34;: &#34;Odit quo iste inventore ab in.&#34;,
-        &#34;created_at&#34;: &#34;2018-09-13T16:50:32.400Z&#34;,
-        &#34;updated_at&#34;: &#34;2018-09-13T16:50:32.400Z&#34;,
+        &#34;_id&#34;: &#34;5b9d25dd2be61559c6486ee3&#34;,
+        &#34;sender&#34;: {
+          &#34;picture&#34;: null,
+          &#34;_id&#34;: &#34;5b9d23422be61559c6486ee1&#34;,
+          &#34;name&#34;: &#34;User 1&#34;,
+          &#34;email&#34;: &#34;user1@gmail.com&#34;,
+          &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+          &#34;created_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+          &#34;updated_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+          &#34;__v&#34;: 0
+        },
+        &#34;receiver&#34;: {
+          &#34;picture&#34;: null,
+          &#34;_id&#34;: &#34;5b9d234d2be61559c6486ee2&#34;,
+          &#34;name&#34;: &#34;User 2&#34;,
+          &#34;email&#34;: &#34;user2@gmail.com&#34;,
+          &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+          &#34;created_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+          &#34;updated_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+          &#34;__v&#34;: 0
+        },
+        &#34;content&#34;: &#34;TEST MESSAGE 1&#34;,
+        &#34;created_at&#34;: &#34;2018-09-15T15:31:41.313Z&#34;,
+        &#34;updated_at&#34;: &#34;2018-09-15T15:31:41.313Z&#34;,
         &#34;__v&#34;: 0
       }
     },
     {
       &#34;type&#34;: &#34;messages&#34;,
-      &#34;id&#34;: &#34;5b9a9598b7b16a538f4f8761&#34;,
+      &#34;id&#34;: &#34;5b9d25e22be61559c6486ee4&#34;,
       &#34;attributes&#34;: {
-        &#34;_id&#34;: &#34;5b9a9598b7b16a538f4f8761&#34;,
-        &#34;sender&#34;: null,
-        &#34;receiver&#34;: null,
-        &#34;content&#34;: &#34;Qui dolor iure corporis in autem laudantium officia voluptas.&#34;,
-        &#34;created_at&#34;: &#34;2018-09-13T16:51:36.350Z&#34;,
-        &#34;updated_at&#34;: &#34;2018-09-13T16:51:36.350Z&#34;,
+        &#34;_id&#34;: &#34;5b9d25e22be61559c6486ee4&#34;,
+        &#34;sender&#34;: {
+          &#34;picture&#34;: null,
+          &#34;_id&#34;: &#34;5b9d23422be61559c6486ee1&#34;,
+          &#34;name&#34;: &#34;User 1&#34;,
+          &#34;email&#34;: &#34;user1@gmail.com&#34;,
+          &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+          &#34;created_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+          &#34;updated_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+          &#34;__v&#34;: 0
+        },
+        &#34;receiver&#34;: {
+          &#34;picture&#34;: null,
+          &#34;_id&#34;: &#34;5b9d234d2be61559c6486ee2&#34;,
+          &#34;name&#34;: &#34;User 2&#34;,
+          &#34;email&#34;: &#34;user2@gmail.com&#34;,
+          &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+          &#34;created_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+          &#34;updated_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+          &#34;__v&#34;: 0
+        },
+        &#34;content&#34;: &#34;TEST MESSAGE2&#34;,
+        &#34;created_at&#34;: &#34;2018-09-15T15:31:46.780Z&#34;,
+        &#34;updated_at&#34;: &#34;2018-09-15T15:31:46.780Z&#34;,
         &#34;__v&#34;: 0
       }
     },
     {
       &#34;type&#34;: &#34;messages&#34;,
-      &#34;id&#34;: &#34;5b9a962b62452d5459210bf6&#34;,
+      &#34;id&#34;: &#34;5b9d25e82be61559c6486ee5&#34;,
       &#34;attributes&#34;: {
-        &#34;_id&#34;: &#34;5b9a962b62452d5459210bf6&#34;,
-        &#34;sender&#34;: null,
-        &#34;receiver&#34;: null,
-        &#34;content&#34;: &#34;Debitis animi deleniti atque voluptate velit voluptas.&#34;,
-        &#34;created_at&#34;: &#34;2018-09-13T16:54:03.489Z&#34;,
-        &#34;updated_at&#34;: &#34;2018-09-13T16:54:03.489Z&#34;,
+        &#34;_id&#34;: &#34;5b9d25e82be61559c6486ee5&#34;,
+        &#34;sender&#34;: {
+          &#34;picture&#34;: null,
+          &#34;_id&#34;: &#34;5b9d23422be61559c6486ee1&#34;,
+          &#34;name&#34;: &#34;User 1&#34;,
+          &#34;email&#34;: &#34;user1@gmail.com&#34;,
+          &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+          &#34;created_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+          &#34;updated_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+          &#34;__v&#34;: 0
+        },
+        &#34;receiver&#34;: {
+          &#34;picture&#34;: null,
+          &#34;_id&#34;: &#34;5b9d234d2be61559c6486ee2&#34;,
+          &#34;name&#34;: &#34;User 2&#34;,
+          &#34;email&#34;: &#34;user2@gmail.com&#34;,
+          &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+          &#34;created_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+          &#34;updated_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+          &#34;__v&#34;: 0
+        },
+        &#34;content&#34;: &#34;TEST MESSAGE2&#34;,
+        &#34;created_at&#34;: &#34;2018-09-15T15:31:52.919Z&#34;,
+        &#34;updated_at&#34;: &#34;2018-09-15T15:31:52.919Z&#34;,
         &#34;__v&#34;: 0
       }
     }
@@ -812,7 +991,7 @@
               
             </table>
             
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped">
               <tr>
                 <td style="width: 80px;" class="table-primary">
                   GET
@@ -821,12 +1000,20 @@
                   READ
                 </td>
               </tr>
+              
               <tr>
                 <td colspan="2">
-                  http://137.117.181.38:5098 /messages/:id
+                  http://127.0.0.1:5098/messages/id
                 </td>
               </tr>
               
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Headers
+                  </th>
+                </tr>
                 <tr>
                   <td colspan="2">
                     <table class="table table-bordered">
@@ -846,7 +1033,7 @@
                         <td>
                           Authorization
                           
-                          <font color="red">*</font>
+                          <font color="red">* (required)</font>
                               
                         </td>
                         <td>
@@ -862,6 +1049,11 @@
                 </tr>
               
               
+                <tr>
+                  <th colspan="2">
+                    Body
+                  </th>
+                </tr>
                 <tr>
                   <td colspan="2">
                     <table class="table table-bordered">
@@ -879,7 +1071,7 @@
                       
                       <tr>
                         <td>
-                          :id
+                          id
                           
                           <font color="red">*</font>
                               
@@ -897,6 +1089,7 @@
                 </tr>
               
               
+              
                 
                 <tr>
                   <td colspan="2">
@@ -908,14 +1101,32 @@
                     <pre>{
   &#34;data&#34;: {
     &#34;type&#34;: &#34;messages&#34;,
-    &#34;id&#34;: &#34;5b9a962b62452d5459210bf6&#34;,
+    &#34;id&#34;: &#34;5b9d25dd2be61559c6486ee3&#34;,
     &#34;attributes&#34;: {
-      &#34;_id&#34;: &#34;5b9a962b62452d5459210bf6&#34;,
-      &#34;sender&#34;: null,
-      &#34;receiver&#34;: null,
-      &#34;content&#34;: &#34;Debitis animi deleniti atque voluptate velit voluptas.&#34;,
-      &#34;created_at&#34;: &#34;2018-09-13T16:54:03.489Z&#34;,
-      &#34;updated_at&#34;: &#34;2018-09-13T16:54:03.489Z&#34;,
+      &#34;_id&#34;: &#34;5b9d25dd2be61559c6486ee3&#34;,
+      &#34;sender&#34;: {
+        &#34;picture&#34;: null,
+        &#34;_id&#34;: &#34;5b9d23422be61559c6486ee1&#34;,
+        &#34;name&#34;: &#34;User 1&#34;,
+        &#34;email&#34;: &#34;user1@gmail.com&#34;,
+        &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+        &#34;created_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+        &#34;updated_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+        &#34;__v&#34;: 0
+      },
+      &#34;receiver&#34;: {
+        &#34;picture&#34;: null,
+        &#34;_id&#34;: &#34;5b9d234d2be61559c6486ee2&#34;,
+        &#34;name&#34;: &#34;User 2&#34;,
+        &#34;email&#34;: &#34;user2@gmail.com&#34;,
+        &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+        &#34;created_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+        &#34;updated_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+        &#34;__v&#34;: 0
+      },
+      &#34;content&#34;: &#34;TEST MESSAGE 1&#34;,
+      &#34;created_at&#34;: &#34;2018-09-15T15:31:41.313Z&#34;,
+      &#34;updated_at&#34;: &#34;2018-09-15T15:31:41.313Z&#34;,
       &#34;__v&#34;: 0
     }
   }
@@ -926,7 +1137,7 @@
               
             </table>
             
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped">
               <tr>
                 <td style="width: 80px;" class="table-warning">
                   POST
@@ -935,12 +1146,20 @@
                   CREATE
                 </td>
               </tr>
+              
               <tr>
                 <td colspan="2">
-                  http://137.117.181.38:5098 /messages
+                  http://127.0.0.1:5098/messages
                 </td>
               </tr>
               
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Headers
+                  </th>
+                </tr>
                 <tr>
                   <td colspan="2">
                     <table class="table table-bordered">
@@ -960,7 +1179,7 @@
                         <td>
                           Authorization
                           
-                          <font color="red">*</font>
+                          <font color="red">* (required)</font>
                               
                         </td>
                         <td>
@@ -976,6 +1195,11 @@
                 </tr>
               
               
+                <tr>
+                  <th colspan="2">
+                    Body
+                  </th>
+                </tr>
                 <tr>
                   <td colspan="2">
                     <table class="table table-bordered">
@@ -1041,6 +1265,7 @@
                 </tr>
               
               
+              
                 
                 <tr>
                   <td colspan="2">
@@ -1052,14 +1277,32 @@
                     <pre>{
   &#34;data&#34;: {
     &#34;type&#34;: &#34;messages&#34;,
-    &#34;id&#34;: &#34;5b9b99aba4962c57c8d75fd3&#34;,
+    &#34;id&#34;: &#34;5b9d25dd2be61559c6486ee3&#34;,
     &#34;attributes&#34;: {
-      &#34;_id&#34;: &#34;5b9b99aba4962c57c8d75fd3&#34;,
-      &#34;sender&#34;: &#34;5b9b8f2cc3ac3343e4f1db33&#34;,
-      &#34;receiver&#34;: &#34;5b9b816056027225afbdd746&#34;,
-      &#34;content&#34;: &#34;TEST MESSAGE&#34;,
-      &#34;created_at&#34;: &#34;2018-09-14T11:21:15.409Z&#34;,
-      &#34;updated_at&#34;: &#34;2018-09-14T11:21:15.409Z&#34;,
+      &#34;_id&#34;: &#34;5b9d25dd2be61559c6486ee3&#34;,
+      &#34;sender&#34;: {
+        &#34;picture&#34;: null,
+        &#34;_id&#34;: &#34;5b9d23422be61559c6486ee1&#34;,
+        &#34;name&#34;: &#34;User 1&#34;,
+        &#34;email&#34;: &#34;user1@gmail.com&#34;,
+        &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+        &#34;created_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+        &#34;updated_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+        &#34;__v&#34;: 0
+      },
+      &#34;receiver&#34;: {
+        &#34;picture&#34;: null,
+        &#34;_id&#34;: &#34;5b9d234d2be61559c6486ee2&#34;,
+        &#34;name&#34;: &#34;User 2&#34;,
+        &#34;email&#34;: &#34;user2@gmail.com&#34;,
+        &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+        &#34;created_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+        &#34;updated_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+        &#34;__v&#34;: 0
+      },
+      &#34;content&#34;: &#34;TEST MESSAGE 1&#34;,
+      &#34;created_at&#34;: &#34;2018-09-15T15:31:41.313Z&#34;,
+      &#34;updated_at&#34;: &#34;2018-09-15T15:31:41.313Z&#34;,
       &#34;__v&#34;: 0
     }
   }
@@ -1070,7 +1313,7 @@
               
             </table>
             
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped">
               <tr>
                 <td style="width: 80px;" class="table-danger">
                   DELETE
@@ -1079,12 +1322,20 @@
                   DELETE
                 </td>
               </tr>
+              
               <tr>
                 <td colspan="2">
-                  http://137.117.181.38:5098 /messages/:id
+                  http://127.0.0.1:5098/messages/id
                 </td>
               </tr>
               
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Headers
+                  </th>
+                </tr>
                 <tr>
                   <td colspan="2">
                     <table class="table table-bordered">
@@ -1104,7 +1355,7 @@
                         <td>
                           Authorization
                           
-                          <font color="red">*</font>
+                          <font color="red">* (required)</font>
                               
                         </td>
                         <td>
@@ -1120,6 +1371,11 @@
                 </tr>
               
               
+                <tr>
+                  <th colspan="2">
+                    Body
+                  </th>
+                </tr>
                 <tr>
                   <td colspan="2">
                     <table class="table table-bordered">
@@ -1137,7 +1393,7 @@
                       
                       <tr>
                         <td>
-                          :id
+                          id
                           
                           <font color="red">*</font>
                               
@@ -1155,6 +1411,7 @@
                 </tr>
               
               
+              
                 
                 <tr>
                   <td colspan="2">
@@ -1166,14 +1423,32 @@
                     <pre>{
   &#34;data&#34;: {
     &#34;type&#34;: &#34;messages&#34;,
-    &#34;id&#34;: &#34;5b9b99aba4962c57c8d75fd3&#34;,
+    &#34;id&#34;: &#34;5b9d25dd2be61559c6486ee3&#34;,
     &#34;attributes&#34;: {
-      &#34;_id&#34;: &#34;5b9b99aba4962c57c8d75fd3&#34;,
-      &#34;sender&#34;: &#34;5b9b8f2cc3ac3343e4f1db33&#34;,
-      &#34;receiver&#34;: &#34;5b9b816056027225afbdd746&#34;,
-      &#34;content&#34;: &#34;TEST MESSAGE&#34;,
-      &#34;created_at&#34;: &#34;2018-09-14T11:21:15.409Z&#34;,
-      &#34;updated_at&#34;: &#34;2018-09-14T11:21:15.409Z&#34;,
+      &#34;_id&#34;: &#34;5b9d25dd2be61559c6486ee3&#34;,
+      &#34;sender&#34;: {
+        &#34;picture&#34;: null,
+        &#34;_id&#34;: &#34;5b9d23422be61559c6486ee1&#34;,
+        &#34;name&#34;: &#34;User 1&#34;,
+        &#34;email&#34;: &#34;user1@gmail.com&#34;,
+        &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+        &#34;created_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+        &#34;updated_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+        &#34;__v&#34;: 0
+      },
+      &#34;receiver&#34;: {
+        &#34;picture&#34;: null,
+        &#34;_id&#34;: &#34;5b9d234d2be61559c6486ee2&#34;,
+        &#34;name&#34;: &#34;User 2&#34;,
+        &#34;email&#34;: &#34;user2@gmail.com&#34;,
+        &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+        &#34;created_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+        &#34;updated_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+        &#34;__v&#34;: 0
+      },
+      &#34;content&#34;: &#34;TEST MESSAGE 1&#34;,
+      &#34;created_at&#34;: &#34;2018-09-15T15:31:41.313Z&#34;,
+      &#34;updated_at&#34;: &#34;2018-09-15T15:31:41.313Z&#34;,
       &#34;__v&#34;: 0
     }
   }
@@ -1189,68 +1464,186 @@
       </table>
       
       <table class="table table-bordered">
+        
         <tr>
-          <th>
-            USERS
+          <th id="SOCKET.IO">
+            SOCKET.IO
           </th>
         </tr>
+        
         <tr>
           <td>
             
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped">
               <tr>
-                <td style="width: 80px;" class="table-primary">
-                  GET
+                <td style="width: 80px;" class="">
+                  CONNECT
                 </td>
                 <td>
-                  PAGINATE
-                </td>
-              </tr>
-              <tr>
-                <td colspan="2">
-                  http://137.117.181.38:5098 /users
+                  
                 </td>
               </tr>
               
+              <tr>
+                <td colspan="2">
+                  http://127.0.0.1:5098/
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td colspan="2">
+                Connection without a valid user token is dropped by immediatly disconnect.
+                </td>
+              </tr>
+              
+              
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Handshake Query
+                  </th>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <table class="table table-bordered">
+                      <tr>
+                        <th>
+                          Name
+                        </th>
+                        <th>
+                          Type
+                        </th>
+                        <th>
+                          Description
+                        </th>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          token
+                          
+                          <font color="red">*</font>
+                              
+                        </td>
+                        <td>
+                          String
+                        </td>
+                        <td>
+                          The user token
+                        </td>
+                      </tr>
+                      
+                    </table>
+                  </td>
+                </tr>
               
               
             </table>
             
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped">
               <tr>
-                <td style="width: 80px;" class="table-primary">
-                  GET
+                <td style="width: 80px;" class="">
+                  LISTEN
                 </td>
                 <td>
-                  READ
+                  *
                 </td>
               </tr>
+              
+              
               <tr>
                 <td colspan="2">
-                  http://137.117.181.38:5098 /users/:id
+                Received events with name auth.login mean that connection is successful.
                 </td>
               </tr>
               
               
+              
+              
+              
+                
+                <tr>
+                  <td colspan="2">
+                    <strong>Payload</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <pre>{
+  &#34;name&#34;: &#34;auth.login&#34;,
+  &#34;status&#34;: 200,
+  &#34;data&#34;: {
+    &#34;type&#34;: &#34;users&#34;,
+    &#34;id&#34;: &#34;5b9d3beb2211027f50eeb64b&#34;,
+    &#34;attributes&#34;: {
+      &#34;picture&#34;: null,
+      &#34;_id&#34;: &#34;5b9d3beb2211027f50eeb64b&#34;,
+      &#34;name&#34;: &#34;Chet McLaughlin V&#34;,
+      &#34;email&#34;: &#34;Johann.Gutkowski54@gmail.com&#34;,
+      &#34;created_at&#34;: &#34;2018-09-15T17:05:47.440Z&#34;,
+      &#34;updated_at&#34;: &#34;2018-09-15T17:05:47.440Z&#34;,
+      &#34;iat&#34;: 1537031147,
+      &#34;exp&#34;: 1568567147
+    }
+  }
+}</pre>              
+                  </td>
+                </tr>
+                
               
             </table>
             
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped">
               <tr>
-                <td style="width: 80px;" class="table-danger">
-                  DELETE
+                <td style="width: 80px;" class="">
+                  LISTEN
                 </td>
                 <td>
-                  DELETE
+                  *
                 </td>
               </tr>
+              
+              
               <tr>
                 <td colspan="2">
-                  http://137.117.181.38:5098 /users/:id
+                Received events with name messages.create mean that the connected user has received a new message.
                 </td>
               </tr>
               
               
+              
+              
+              
+                
+                <tr>
+                  <td colspan="2">
+                    <strong>Payload</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <pre>{
+  &#34;name&#34;: &#34;messages.create&#34;,
+  &#34;status&#34;: 200,
+  &#34;data&#34;: {
+    &#34;type&#34;: &#34;messages&#34;,
+    &#34;id&#34;: &#34;5b9d3dd1c9c37305dacac0de&#34;,
+    &#34;attributes&#34;: {
+      &#34;_id&#34;: &#34;5b9d3dd1c9c37305dacac0de&#34;,
+      &#34;sender&#34;: &#34;5b9d3dd1c9c37305dacac0db&#34;,
+      &#34;receiver&#34;: &#34;5b9d3dd1c9c37305dacac0dc&#34;,
+      &#34;content&#34;: &#34;Aliquid debitis deserunt sit.&#34;,
+      &#34;created_at&#34;: &#34;2018-09-15T17:13:53.449Z&#34;,
+      &#34;updated_at&#34;: &#34;2018-09-15T17:13:53.449Z&#34;,
+      &#34;__v&#34;: 0
+    }
+  }
+}</pre>              
+                  </td>
+                </tr>
+                
               
             </table>
             

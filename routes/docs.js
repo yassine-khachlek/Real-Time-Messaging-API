@@ -4,11 +4,12 @@ var router = express.Router()
 /* GET home page. */
 router.get('/', function (req, res, next) {
   var docs = {
-    title: 'Documentations',
+    title: 'Real Time Messaging Api',
     app_url: process.env.APP_URL,
+    repository: 'https://github.com/yassine-khachlek/real-time-messaging-api',
     groups: [
       {
-        name: 'authentication',
+        name: 'AUTHENTICATION',
         endpoints: [
           {
             name: 'register',
@@ -32,6 +33,12 @@ router.get('/', function (req, res, next) {
                 type: 'String',
                 description: 'The user password',
                 required: true
+              },
+              {
+                name: 'picture',
+                type: 'String',
+                description: 'The picture file id',
+                required: false
               }
             ],
             responses: [
@@ -40,15 +47,15 @@ router.get('/', function (req, res, next) {
                 value: {
                   'data': {
                     'type': 'users',
-                    'id': '5b9b8f2cc3ac3343e4f1db33',
+                    'id': '5b9d23422be61559c6486ee1',
                     'attributes': {
                       'picture': null,
-                      '_id': '5b9b8f2cc3ac3343e4f1db33',
-                      'name': 'Yassine Khachlek',
-                      'email': 'yassine.khachlek@gmail.comx',
+                      '_id': '5b9d23422be61559c6486ee1',
+                      'name': 'User 1',
+                      'email': 'user1@gmail.com',
                       'password': '5ebe2294ecd0e0f08eab7690d2a6ee69',
-                      'created_at': '2018-09-14T10:36:28.019Z',
-                      'updated_at': '2018-09-14T10:36:28.019Z',
+                      'created_at': '2018-09-15T15:20:34.301Z',
+                      'updated_at': '2018-09-15T15:20:34.301Z',
                       '__v': 0
                     }
                   }
@@ -107,16 +114,16 @@ router.get('/', function (req, res, next) {
                 value: {
                   'data': {
                     'type': 'users',
-                    'id': '5b9b816056027225afbdd746',
+                    'id': '5b9d23422be61559c6486ee1',
                     'attributes': {
                       'picture': null,
-                      '_id': '5b9b816056027225afbdd746',
-                      'name': 'Yassine Khachlek',
-                      'email': 'yassine.khachlek@gmail.com',
-                      'created_at': '2018-09-14T09:37:36.653Z',
-                      'updated_at': '2018-09-14T09:37:36.653Z',
-                      'iat': 1536918198,
-                      'exp': 1568454198
+                      '_id': '5b9d23422be61559c6486ee1',
+                      'name': 'User 1',
+                      'email': 'user1@gmail.com',
+                      'password': '5ebe2294ecd0e0f08eab7690d2a6ee69',
+                      'created_at': '2018-09-15T15:20:34.301Z',
+                      'updated_at': '2018-09-15T15:20:34.301Z',
+                      '__v': 0
                     }
                   }
                 }
@@ -126,7 +133,7 @@ router.get('/', function (req, res, next) {
         ]
       },
       {
-        name: 'files',
+        name: 'FILES',
         endpoints: [
           {
             name: 'PAGINATE',
@@ -183,7 +190,7 @@ router.get('/', function (req, res, next) {
           },
           {
             name: 'READ',
-            url: '/files/:id',
+            url: '/files/id',
             method: 'GET',
             responses: [
               {
@@ -208,11 +215,11 @@ router.get('/', function (req, res, next) {
           },
           {
             name: 'SERVE',
-            url: '/files/:id/:name',
+            url: '/files/id/:name',
             method: 'GET',
             params: [
               {
-                name: ':id',
+                name: 'id',
                 type: 'String',
                 description: 'The file id',
                 required: true
@@ -266,11 +273,11 @@ router.get('/', function (req, res, next) {
           },
           {
             name: 'DELETE',
-            url: '/files/:id',
+            url: '/files/id',
             method: 'DELETE',
             params: [
               {
-                name: ':id',
+                name: 'id',
                 type: 'String',
                 description: 'The file id',
                 required: true
@@ -300,7 +307,7 @@ router.get('/', function (req, res, next) {
         ]
       },
       {
-        name: 'messages',
+        name: 'MESSAGES',
         endpoints: [
           {
             name: 'PAGINATE',
@@ -321,40 +328,94 @@ router.get('/', function (req, res, next) {
                   'data': [
                     {
                       'type': 'messages',
-                      'id': '5b9a95582e2c39532c3c49f3',
+                      'id': '5b9d25dd2be61559c6486ee3',
                       'attributes': {
-                        '_id': '5b9a95582e2c39532c3c49f3',
-                        'sender': null,
-                        'receiver': null,
-                        'content': 'Odit quo iste inventore ab in.',
-                        'created_at': '2018-09-13T16:50:32.400Z',
-                        'updated_at': '2018-09-13T16:50:32.400Z',
+                        '_id': '5b9d25dd2be61559c6486ee3',
+                        'sender': {
+                          'picture': null,
+                          '_id': '5b9d23422be61559c6486ee1',
+                          'name': 'User 1',
+                          'email': 'user1@gmail.com',
+                          'password': '5ebe2294ecd0e0f08eab7690d2a6ee69',
+                          'created_at': '2018-09-15T15:20:34.301Z',
+                          'updated_at': '2018-09-15T15:20:34.301Z',
+                          '__v': 0
+                        },
+                        'receiver': {
+                          'picture': null,
+                          '_id': '5b9d234d2be61559c6486ee2',
+                          'name': 'User 2',
+                          'email': 'user2@gmail.com',
+                          'password': '5ebe2294ecd0e0f08eab7690d2a6ee69',
+                          'created_at': '2018-09-15T15:20:45.484Z',
+                          'updated_at': '2018-09-15T15:20:45.484Z',
+                          '__v': 0
+                        },
+                        'content': 'TEST MESSAGE 1',
+                        'created_at': '2018-09-15T15:31:41.313Z',
+                        'updated_at': '2018-09-15T15:31:41.313Z',
                         '__v': 0
                       }
                     },
                     {
                       'type': 'messages',
-                      'id': '5b9a9598b7b16a538f4f8761',
+                      'id': '5b9d25e22be61559c6486ee4',
                       'attributes': {
-                        '_id': '5b9a9598b7b16a538f4f8761',
-                        'sender': null,
-                        'receiver': null,
-                        'content': 'Qui dolor iure corporis in autem laudantium officia voluptas.',
-                        'created_at': '2018-09-13T16:51:36.350Z',
-                        'updated_at': '2018-09-13T16:51:36.350Z',
+                        '_id': '5b9d25e22be61559c6486ee4',
+                        'sender': {
+                          'picture': null,
+                          '_id': '5b9d23422be61559c6486ee1',
+                          'name': 'User 1',
+                          'email': 'user1@gmail.com',
+                          'password': '5ebe2294ecd0e0f08eab7690d2a6ee69',
+                          'created_at': '2018-09-15T15:20:34.301Z',
+                          'updated_at': '2018-09-15T15:20:34.301Z',
+                          '__v': 0
+                        },
+                        'receiver': {
+                          'picture': null,
+                          '_id': '5b9d234d2be61559c6486ee2',
+                          'name': 'User 2',
+                          'email': 'user2@gmail.com',
+                          'password': '5ebe2294ecd0e0f08eab7690d2a6ee69',
+                          'created_at': '2018-09-15T15:20:45.484Z',
+                          'updated_at': '2018-09-15T15:20:45.484Z',
+                          '__v': 0
+                        },
+                        'content': 'TEST MESSAGE2',
+                        'created_at': '2018-09-15T15:31:46.780Z',
+                        'updated_at': '2018-09-15T15:31:46.780Z',
                         '__v': 0
                       }
                     },
                     {
                       'type': 'messages',
-                      'id': '5b9a962b62452d5459210bf6',
+                      'id': '5b9d25e82be61559c6486ee5',
                       'attributes': {
-                        '_id': '5b9a962b62452d5459210bf6',
-                        'sender': null,
-                        'receiver': null,
-                        'content': 'Debitis animi deleniti atque voluptate velit voluptas.',
-                        'created_at': '2018-09-13T16:54:03.489Z',
-                        'updated_at': '2018-09-13T16:54:03.489Z',
+                        '_id': '5b9d25e82be61559c6486ee5',
+                        'sender': {
+                          'picture': null,
+                          '_id': '5b9d23422be61559c6486ee1',
+                          'name': 'User 1',
+                          'email': 'user1@gmail.com',
+                          'password': '5ebe2294ecd0e0f08eab7690d2a6ee69',
+                          'created_at': '2018-09-15T15:20:34.301Z',
+                          'updated_at': '2018-09-15T15:20:34.301Z',
+                          '__v': 0
+                        },
+                        'receiver': {
+                          'picture': null,
+                          '_id': '5b9d234d2be61559c6486ee2',
+                          'name': 'User 2',
+                          'email': 'user2@gmail.com',
+                          'password': '5ebe2294ecd0e0f08eab7690d2a6ee69',
+                          'created_at': '2018-09-15T15:20:45.484Z',
+                          'updated_at': '2018-09-15T15:20:45.484Z',
+                          '__v': 0
+                        },
+                        'content': 'TEST MESSAGE2',
+                        'created_at': '2018-09-15T15:31:52.919Z',
+                        'updated_at': '2018-09-15T15:31:52.919Z',
                         '__v': 0
                       }
                     }
@@ -365,7 +426,7 @@ router.get('/', function (req, res, next) {
           },
           {
             name: 'READ',
-            url: '/messages/:id',
+            url: '/messages/id',
             method: 'GET',
             headers: [
               {
@@ -377,7 +438,7 @@ router.get('/', function (req, res, next) {
             ],
             params: [
               {
-                name: ':id',
+                name: 'id',
                 type: 'String',
                 description: 'The file id',
                 required: true
@@ -389,14 +450,32 @@ router.get('/', function (req, res, next) {
                 value: {
                   'data': {
                     'type': 'messages',
-                    'id': '5b9a962b62452d5459210bf6',
+                    'id': '5b9d25dd2be61559c6486ee3',
                     'attributes': {
-                      '_id': '5b9a962b62452d5459210bf6',
-                      'sender': null,
-                      'receiver': null,
-                      'content': 'Debitis animi deleniti atque voluptate velit voluptas.',
-                      'created_at': '2018-09-13T16:54:03.489Z',
-                      'updated_at': '2018-09-13T16:54:03.489Z',
+                      '_id': '5b9d25dd2be61559c6486ee3',
+                      'sender': {
+                        'picture': null,
+                        '_id': '5b9d23422be61559c6486ee1',
+                        'name': 'User 1',
+                        'email': 'user1@gmail.com',
+                        'password': '5ebe2294ecd0e0f08eab7690d2a6ee69',
+                        'created_at': '2018-09-15T15:20:34.301Z',
+                        'updated_at': '2018-09-15T15:20:34.301Z',
+                        '__v': 0
+                      },
+                      'receiver': {
+                        'picture': null,
+                        '_id': '5b9d234d2be61559c6486ee2',
+                        'name': 'User 2',
+                        'email': 'user2@gmail.com',
+                        'password': '5ebe2294ecd0e0f08eab7690d2a6ee69',
+                        'created_at': '2018-09-15T15:20:45.484Z',
+                        'updated_at': '2018-09-15T15:20:45.484Z',
+                        '__v': 0
+                      },
+                      'content': 'TEST MESSAGE 1',
+                      'created_at': '2018-09-15T15:31:41.313Z',
+                      'updated_at': '2018-09-15T15:31:41.313Z',
                       '__v': 0
                     }
                   }
@@ -442,14 +521,32 @@ router.get('/', function (req, res, next) {
                 value: {
                   'data': {
                     'type': 'messages',
-                    'id': '5b9b99aba4962c57c8d75fd3',
+                    'id': '5b9d25dd2be61559c6486ee3',
                     'attributes': {
-                      '_id': '5b9b99aba4962c57c8d75fd3',
-                      'sender': '5b9b8f2cc3ac3343e4f1db33',
-                      'receiver': '5b9b816056027225afbdd746',
-                      'content': 'TEST MESSAGE',
-                      'created_at': '2018-09-14T11:21:15.409Z',
-                      'updated_at': '2018-09-14T11:21:15.409Z',
+                      '_id': '5b9d25dd2be61559c6486ee3',
+                      'sender': {
+                        'picture': null,
+                        '_id': '5b9d23422be61559c6486ee1',
+                        'name': 'User 1',
+                        'email': 'user1@gmail.com',
+                        'password': '5ebe2294ecd0e0f08eab7690d2a6ee69',
+                        'created_at': '2018-09-15T15:20:34.301Z',
+                        'updated_at': '2018-09-15T15:20:34.301Z',
+                        '__v': 0
+                      },
+                      'receiver': {
+                        'picture': null,
+                        '_id': '5b9d234d2be61559c6486ee2',
+                        'name': 'User 2',
+                        'email': 'user2@gmail.com',
+                        'password': '5ebe2294ecd0e0f08eab7690d2a6ee69',
+                        'created_at': '2018-09-15T15:20:45.484Z',
+                        'updated_at': '2018-09-15T15:20:45.484Z',
+                        '__v': 0
+                      },
+                      'content': 'TEST MESSAGE 1',
+                      'created_at': '2018-09-15T15:31:41.313Z',
+                      'updated_at': '2018-09-15T15:31:41.313Z',
                       '__v': 0
                     }
                   }
@@ -459,7 +556,7 @@ router.get('/', function (req, res, next) {
           },
           {
             name: 'DELETE',
-            url: '/messages/:id',
+            url: '/messages/id',
             method: 'DELETE',
             headers: [
               {
@@ -471,7 +568,7 @@ router.get('/', function (req, res, next) {
             ],
             params: [
               {
-                name: ':id',
+                name: 'id',
                 type: 'String',
                 description: 'The message id',
                 required: true
@@ -483,14 +580,32 @@ router.get('/', function (req, res, next) {
                 value: {
                   'data': {
                     'type': 'messages',
-                    'id': '5b9b99aba4962c57c8d75fd3',
+                    'id': '5b9d25dd2be61559c6486ee3',
                     'attributes': {
-                      '_id': '5b9b99aba4962c57c8d75fd3',
-                      'sender': '5b9b8f2cc3ac3343e4f1db33',
-                      'receiver': '5b9b816056027225afbdd746',
-                      'content': 'TEST MESSAGE',
-                      'created_at': '2018-09-14T11:21:15.409Z',
-                      'updated_at': '2018-09-14T11:21:15.409Z',
+                      '_id': '5b9d25dd2be61559c6486ee3',
+                      'sender': {
+                        'picture': null,
+                        '_id': '5b9d23422be61559c6486ee1',
+                        'name': 'User 1',
+                        'email': 'user1@gmail.com',
+                        'password': '5ebe2294ecd0e0f08eab7690d2a6ee69',
+                        'created_at': '2018-09-15T15:20:34.301Z',
+                        'updated_at': '2018-09-15T15:20:34.301Z',
+                        '__v': 0
+                      },
+                      'receiver': {
+                        'picture': null,
+                        '_id': '5b9d234d2be61559c6486ee2',
+                        'name': 'User 2',
+                        'email': 'user2@gmail.com',
+                        'password': '5ebe2294ecd0e0f08eab7690d2a6ee69',
+                        'created_at': '2018-09-15T15:20:45.484Z',
+                        'updated_at': '2018-09-15T15:20:45.484Z',
+                        '__v': 0
+                      },
+                      'content': 'TEST MESSAGE 1',
+                      'created_at': '2018-09-15T15:31:41.313Z',
+                      'updated_at': '2018-09-15T15:31:41.313Z',
                       '__v': 0
                     }
                   }
@@ -501,22 +616,79 @@ router.get('/', function (req, res, next) {
         ]
       },
       {
-        name: 'users',
+        name: 'SOCKET.IO',
         endpoints: [
           {
-            name: 'PAGINATE',
-            url: '/users',
-            method: 'GET'
+            name: '',
+            url: '/',
+            description: 'Connection without a valid user token is dropped by immediatly disconnect.',
+            method: 'CONNECT',
+            queries: [
+              {
+                name: 'token',
+                type: 'String',
+                description: 'The user token',
+                required: true
+              }
+            ],
+            responses: [
+
+            ]
           },
           {
-            name: 'READ',
-            url: '/users/:id',
-            method: 'GET'
+            name: '*',
+            description: 'Received events with name auth.login mean that connection is successful.',
+            method: 'LISTEN',
+            responses: [
+              {
+                name: 'Payload',
+                value: {
+                  name: 'auth.login',
+                  status: 200,
+                  data: {
+                    'type': 'users',
+                    'id': '5b9d3beb2211027f50eeb64b',
+                    'attributes': {
+                      'picture': null,
+                      '_id': '5b9d3beb2211027f50eeb64b',
+                      'name': 'Chet McLaughlin V',
+                      'email': 'Johann.Gutkowski54@gmail.com',
+                      'created_at': '2018-09-15T17:05:47.440Z',
+                      'updated_at': '2018-09-15T17:05:47.440Z',
+                      'iat': 1537031147,
+                      'exp': 1568567147
+                    }
+                  }
+                }
+              }
+            ]
           },
           {
-            name: 'DELETE',
-            url: '/users/:id',
-            method: 'DELETE'
+            name: '*',
+            description: 'Received events with name messages.create mean that the connected user has received a new message.',
+            method: 'LISTEN',
+            responses: [
+              {
+                name: 'Payload',
+                value: {
+                  name: 'messages.create',
+                  status: 200,
+                  data: {
+                    type: 'messages',
+                    id: '5b9d3dd1c9c37305dacac0de',
+                    attributes: {
+                      _id: '5b9d3dd1c9c37305dacac0de',
+                      sender: '5b9d3dd1c9c37305dacac0db',
+                      receiver: '5b9d3dd1c9c37305dacac0dc',
+                      content: 'Aliquid debitis deserunt sit.',
+                      created_at: '2018-09-15T17:13:53.449Z',
+                      updated_at: '2018-09-15T17:13:53.449Z',
+                      __v: 0
+                    }
+                  }
+                }
+              }
+            ]
           }
         ]
       }

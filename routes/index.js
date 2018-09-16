@@ -10,7 +10,8 @@ router.get('/', function (req, res, next) {
     'meta': {
       'authors': [
         'Yassine Khachlek'
-      ]
+      ],
+      'documentation': process.env.APP_URL + '/docs'
     }
   })
 })
