@@ -23,7 +23,7 @@ describe('WebSocketAuthentication', function () {
       ioClient.once('*', function (eventData) {
         assert.strictEqual(eventData.name, 'auth.login')
         assert.strictEqual(eventData.status, 200)
-        assert.strictEqual(eventData.data._id, users[0]._id)
+        assert.strictEqual(eventData.data.id, users[0]._id)
 
         ioClient.disconnect()
         done()

@@ -55,7 +55,11 @@ io.on('connection', function(socket){
   socket.emit('*', {
     name: 'auth.login',
     status: 200,
-    data: socket.decoded
+    data: {
+      type: 'users',
+      id: socket.decoded._id,
+      attributes: socket.decoded
+    }
   })
 
   socket.on('disconnect', function(){

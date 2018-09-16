@@ -74,9 +74,13 @@ Open http://127.0.0.1:5098 in your browser, you should get the api response like
 {"jsonapi":{"version":"1.0"},...}
 ```
 
-To check the api documentation visit the link bellow (on progress):
+To check the api documentation visit the link bellow:
 
 http://127.0.0.1:5098/docs
+
+or
+
+https://yassine-khachlek.github.io/real-time-messaging-api/
 
 
 ## Continuous Deployment with Bitbucket Pipelines

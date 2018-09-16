@@ -1,0 +1,1665 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title></title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <style type="text/css">
+      body {
+        padding: 50px;
+        font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+      }
+
+      a {
+        color: #00B7FF;
+      }
+
+      pre {
+        padding-top: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <main role="main" class="container">
+      
+      <h1>Real Time Messaging Api</h1>
+      
+
+      <p>
+      
+      <strong>Project repository:</strong> <a href="https://github.com/yassine-khachlek/real-time-messaging-api" target="_blank">https://github.com/yassine-khachlek/real-time-messaging-api</a>
+              
+      </p>
+
+      <ul>
+        
+        <li>
+          <a href="#AUTHENTICATION">AUTHENTICATION</a>
+        </li>
+        
+        <li>
+          <a href="#FILES">FILES</a>
+        </li>
+        
+        <li>
+          <a href="#MESSAGES">MESSAGES</a>
+        </li>
+        
+        <li>
+          <a href="#SOCKET.IO">SOCKET.IO</a>
+        </li>
+        
+      </ul>
+
+      
+      <table class="table table-bordered">
+        
+        <tr>
+          <th id="AUTHENTICATION">
+            AUTHENTICATION
+          </th>
+        </tr>
+        
+        <tr>
+          <td>
+            
+            <table class="table table-bordered table-striped">
+              <tr>
+                <td style="width: 80px;" class="table-warning">
+                  POST
+                </td>
+                <td>
+                  register
+                </td>
+              </tr>
+              
+              <tr>
+                <td colspan="2">
+                  http://127.0.0.1:5098/auth/register
+                </td>
+              </tr>
+              
+              
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Body
+                  </th>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <table class="table table-bordered">
+                      <tr>
+                        <th>
+                          Name
+                        </th>
+                        <th>
+                          Type
+                        </th>
+                        <th>
+                          Description
+                        </th>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          name
+                          
+                          <font color="red">*</font>
+                              
+                        </td>
+                        <td>
+                          String
+                        </td>
+                        <td>
+                          The user name
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          username
+                          
+                          <font color="red">*</font>
+                              
+                        </td>
+                        <td>
+                          String
+                        </td>
+                        <td>
+                          The user email
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          password
+                          
+                          <font color="red">*</font>
+                              
+                        </td>
+                        <td>
+                          String
+                        </td>
+                        <td>
+                          The user password
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          picture
+                              
+                        </td>
+                        <td>
+                          String
+                        </td>
+                        <td>
+                          The picture file id
+                        </td>
+                      </tr>
+                      
+                    </table>
+                  </td>
+                </tr>
+              
+              
+              
+                
+                <tr>
+                  <td colspan="2">
+                    <strong>Response example</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <pre>{
+  &#34;data&#34;: {
+    &#34;type&#34;: &#34;users&#34;,
+    &#34;id&#34;: &#34;5b9d23422be61559c6486ee1&#34;,
+    &#34;attributes&#34;: {
+      &#34;picture&#34;: null,
+      &#34;_id&#34;: &#34;5b9d23422be61559c6486ee1&#34;,
+      &#34;name&#34;: &#34;User 1&#34;,
+      &#34;email&#34;: &#34;user1@gmail.com&#34;,
+      &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+      &#34;created_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+      &#34;updated_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+      &#34;__v&#34;: 0
+    }
+  }
+}</pre>              
+                  </td>
+                </tr>
+                
+              
+            </table>
+            
+            <table class="table table-bordered table-striped">
+              <tr>
+                <td style="width: 80px;" class="table-warning">
+                  POST
+                </td>
+                <td>
+                  login
+                </td>
+              </tr>
+              
+              <tr>
+                <td colspan="2">
+                  http://127.0.0.1:5098/auth/login
+                </td>
+              </tr>
+              
+              
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Body
+                  </th>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <table class="table table-bordered">
+                      <tr>
+                        <th>
+                          Name
+                        </th>
+                        <th>
+                          Type
+                        </th>
+                        <th>
+                          Description
+                        </th>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          username
+                          
+                          <font color="red">*</font>
+                              
+                        </td>
+                        <td>
+                          String
+                        </td>
+                        <td>
+                          The user email
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          password
+                          
+                          <font color="red">*</font>
+                              
+                        </td>
+                        <td>
+                          String
+                        </td>
+                        <td>
+                          The user password
+                        </td>
+                      </tr>
+                      
+                    </table>
+                  </td>
+                </tr>
+              
+              
+              
+                
+                <tr>
+                  <td colspan="2">
+                    <strong>Response example</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <pre>{
+  &#34;status&#34;: 200,
+  &#34;data&#34;: {
+    &#34;type&#34;: &#34;tokens&#34;,
+    &#34;attributes&#34;: {
+      &#34;value&#34;: &#34;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaWN0dXJlIjpudWxsLCJfaWQiOiI1YjliODE2MDU2MDI3MjI1YWZ...&#34;
+    }
+  }
+}</pre>              
+                  </td>
+                </tr>
+                
+              
+            </table>
+            
+            <table class="table table-bordered table-striped">
+              <tr>
+                <td style="width: 80px;" class="table-primary">
+                  GET
+                </td>
+                <td>
+                  token verify
+                </td>
+              </tr>
+              
+              <tr>
+                <td colspan="2">
+                  http://127.0.0.1:5098/auth/token/verify
+                </td>
+              </tr>
+              
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Headers
+                  </th>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <table class="table table-bordered">
+                      <tr>
+                        <th>
+                          Name
+                        </th>
+                        <th>
+                          Type
+                        </th>
+                        <th>
+                          Description
+                        </th>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          Authorization
+                          
+                          <font color="red">* (required)</font>
+                              
+                        </td>
+                        <td>
+                          String
+                        </td>
+                        <td>
+                          The user token
+                        </td>
+                      </tr>
+                      
+                    </table>
+                  </td>
+                </tr>
+              
+              
+              
+              
+                
+                <tr>
+                  <td colspan="2">
+                    <strong>Response example</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <pre>{
+  &#34;data&#34;: {
+    &#34;type&#34;: &#34;users&#34;,
+    &#34;id&#34;: &#34;5b9d23422be61559c6486ee1&#34;,
+    &#34;attributes&#34;: {
+      &#34;picture&#34;: null,
+      &#34;_id&#34;: &#34;5b9d23422be61559c6486ee1&#34;,
+      &#34;name&#34;: &#34;User 1&#34;,
+      &#34;email&#34;: &#34;user1@gmail.com&#34;,
+      &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+      &#34;created_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+      &#34;updated_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+      &#34;__v&#34;: 0
+    }
+  }
+}</pre>              
+                  </td>
+                </tr>
+                
+              
+            </table>
+            
+          </td>
+        </tr>
+      </table>
+      
+      <table class="table table-bordered">
+        
+        <tr>
+          <th id="FILES">
+            FILES
+          </th>
+        </tr>
+        
+        <tr>
+          <td>
+            
+            <table class="table table-bordered table-striped">
+              <tr>
+                <td style="width: 80px;" class="table-primary">
+                  GET
+                </td>
+                <td>
+                  PAGINATE
+                </td>
+              </tr>
+              
+              <tr>
+                <td colspan="2">
+                  http://127.0.0.1:5098/files
+                </td>
+              </tr>
+              
+              
+              
+              
+              
+              
+                
+                <tr>
+                  <td colspan="2">
+                    <strong>Response example</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <pre>{
+  &#34;data&#34;: [
+    {
+      &#34;type&#34;: &#34;files&#34;,
+      &#34;id&#34;: &#34;5b9a5f435bb024768314956d&#34;,
+      &#34;attributes&#34;: {
+        &#34;_id&#34;: &#34;5b9a5f435bb024768314956d&#34;,
+        &#34;name&#34;: &#34;picture.png&#34;,
+        &#34;size&#34;: 7841,
+        &#34;type&#34;: &#34;image/png&#34;,
+        &#34;created_at&#34;: &#34;2018-09-13T12:59:47.170Z&#34;,
+        &#34;updated_at&#34;: &#34;2018-09-13T12:59:47.170Z&#34;,
+        &#34;__v&#34;: 0
+      }
+    },
+    {
+      &#34;type&#34;: &#34;files&#34;,
+      &#34;id&#34;: &#34;5b9a5f70665ba376dc985111&#34;,
+      &#34;attributes&#34;: {
+        &#34;_id&#34;: &#34;5b9a5f70665ba376dc985111&#34;,
+        &#34;name&#34;: &#34;picture.png&#34;,
+        &#34;size&#34;: 7841,
+        &#34;type&#34;: &#34;image/png&#34;,
+        &#34;created_at&#34;: &#34;2018-09-13T13:00:32.346Z&#34;,
+        &#34;updated_at&#34;: &#34;2018-09-13T13:00:32.346Z&#34;,
+        &#34;__v&#34;: 0
+      }
+    },
+    {
+      &#34;type&#34;: &#34;files&#34;,
+      &#34;id&#34;: &#34;5b9a5f81d1da187712744c9d&#34;,
+      &#34;attributes&#34;: {
+        &#34;_id&#34;: &#34;5b9a5f81d1da187712744c9d&#34;,
+        &#34;name&#34;: &#34;picture.png&#34;,
+        &#34;size&#34;: 7841,
+        &#34;type&#34;: &#34;image/png&#34;,
+        &#34;created_at&#34;: &#34;2018-09-13T13:00:49.173Z&#34;,
+        &#34;updated_at&#34;: &#34;2018-09-13T13:00:49.173Z&#34;,
+        &#34;__v&#34;: 0
+      }
+    }
+  ]
+}</pre>              
+                  </td>
+                </tr>
+                
+              
+            </table>
+            
+            <table class="table table-bordered table-striped">
+              <tr>
+                <td style="width: 80px;" class="table-primary">
+                  GET
+                </td>
+                <td>
+                  READ
+                </td>
+              </tr>
+              
+              <tr>
+                <td colspan="2">
+                  http://127.0.0.1:5098/files/id
+                </td>
+              </tr>
+              
+              
+              
+              
+              
+              
+                
+                <tr>
+                  <td colspan="2">
+                    <strong>Response example</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <pre>{
+  &#34;data&#34;: {
+    &#34;type&#34;: &#34;files&#34;,
+    &#34;id&#34;: &#34;5b9b9276d0a16c4af7cfd461&#34;,
+    &#34;attributes&#34;: {
+      &#34;_id&#34;: &#34;5b9b9276d0a16c4af7cfd461&#34;,
+      &#34;name&#34;: &#34;picture.png&#34;,
+      &#34;size&#34;: 7841,
+      &#34;type&#34;: &#34;image/png&#34;,
+      &#34;created_at&#34;: &#34;2018-09-14T10:50:30.174Z&#34;,
+      &#34;updated_at&#34;: &#34;2018-09-14T10:50:30.174Z&#34;,
+      &#34;__v&#34;: 0
+    }
+  }
+}</pre>              
+                  </td>
+                </tr>
+                
+              
+            </table>
+            
+            <table class="table table-bordered table-striped">
+              <tr>
+                <td style="width: 80px;" class="table-primary">
+                  GET
+                </td>
+                <td>
+                  SERVE
+                </td>
+              </tr>
+              
+              <tr>
+                <td colspan="2">
+                  http://127.0.0.1:5098/files/id/:name
+                </td>
+              </tr>
+              
+              
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Body
+                  </th>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <table class="table table-bordered">
+                      <tr>
+                        <th>
+                          Name
+                        </th>
+                        <th>
+                          Type
+                        </th>
+                        <th>
+                          Description
+                        </th>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          id
+                          
+                          <font color="red">*</font>
+                              
+                        </td>
+                        <td>
+                          String
+                        </td>
+                        <td>
+                          The file id
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          :name
+                          
+                          <font color="red">*</font>
+                              
+                        </td>
+                        <td>
+                          String
+                        </td>
+                        <td>
+                          The file name
+                        </td>
+                      </tr>
+                      
+                    </table>
+                  </td>
+                </tr>
+              
+              
+              
+                
+                <tr>
+                  <td colspan="2">
+                    <strong>Response example</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <pre>&#34;&lt;Buffer 66 00 68 00 71 00 77 00 68 00 67 00 61 00 64 00 73 00...&gt;&#34;</pre>              
+                  </td>
+                </tr>
+                
+              
+            </table>
+            
+            <table class="table table-bordered table-striped">
+              <tr>
+                <td style="width: 80px;" class="table-warning">
+                  POST
+                </td>
+                <td>
+                  CREATE
+                </td>
+              </tr>
+              
+              <tr>
+                <td colspan="2">
+                  http://127.0.0.1:5098/files
+                </td>
+              </tr>
+              
+              
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Body
+                  </th>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <table class="table table-bordered">
+                      <tr>
+                        <th>
+                          Name
+                        </th>
+                        <th>
+                          Type
+                        </th>
+                        <th>
+                          Description
+                        </th>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          file
+                          
+                          <font color="red">*</font>
+                              
+                        </td>
+                        <td>
+                          File
+                        </td>
+                        <td>
+                          A file
+                        </td>
+                      </tr>
+                      
+                    </table>
+                  </td>
+                </tr>
+              
+              
+              
+                
+                <tr>
+                  <td colspan="2">
+                    <strong>Response example</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <pre>{
+  &#34;data&#34;: {
+    &#34;type&#34;: &#34;files&#34;,
+    &#34;id&#34;: &#34;5b9b918bbbfd7c48a1cbdb3a&#34;,
+    &#34;attributes&#34;: {
+      &#34;_id&#34;: &#34;5b9b918bbbfd7c48a1cbdb3a&#34;,
+      &#34;name&#34;: &#34;picture.png&#34;,
+      &#34;size&#34;: 7841,
+      &#34;type&#34;: &#34;image/png&#34;,
+      &#34;created_at&#34;: &#34;2018-09-14T10:46:35.867Z&#34;,
+      &#34;updated_at&#34;: &#34;2018-09-14T10:46:35.867Z&#34;,
+      &#34;__v&#34;: 0
+    }
+  }
+}</pre>              
+                  </td>
+                </tr>
+                
+              
+            </table>
+            
+            <table class="table table-bordered table-striped">
+              <tr>
+                <td style="width: 80px;" class="table-danger">
+                  DELETE
+                </td>
+                <td>
+                  DELETE
+                </td>
+              </tr>
+              
+              <tr>
+                <td colspan="2">
+                  http://127.0.0.1:5098/files/id
+                </td>
+              </tr>
+              
+              
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Body
+                  </th>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <table class="table table-bordered">
+                      <tr>
+                        <th>
+                          Name
+                        </th>
+                        <th>
+                          Type
+                        </th>
+                        <th>
+                          Description
+                        </th>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          id
+                          
+                          <font color="red">*</font>
+                              
+                        </td>
+                        <td>
+                          String
+                        </td>
+                        <td>
+                          The file id
+                        </td>
+                      </tr>
+                      
+                    </table>
+                  </td>
+                </tr>
+              
+              
+              
+                
+                <tr>
+                  <td colspan="2">
+                    <strong>Response example</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <pre>{
+  &#34;data&#34;: {
+    &#34;type&#34;: &#34;files&#34;,
+    &#34;id&#34;: &#34;5b9b918bbbfd7c48a1cbdb3a&#34;,
+    &#34;attributes&#34;: {
+      &#34;_id&#34;: &#34;5b9b918bbbfd7c48a1cbdb3a&#34;,
+      &#34;name&#34;: &#34;picture.png&#34;,
+      &#34;size&#34;: 7841,
+      &#34;type&#34;: &#34;image/png&#34;,
+      &#34;created_at&#34;: &#34;2018-09-14T10:46:35.867Z&#34;,
+      &#34;updated_at&#34;: &#34;2018-09-14T10:46:35.867Z&#34;,
+      &#34;__v&#34;: 0
+    }
+  }
+}</pre>              
+                  </td>
+                </tr>
+                
+              
+            </table>
+            
+          </td>
+        </tr>
+      </table>
+      
+      <table class="table table-bordered">
+        
+        <tr>
+          <th id="MESSAGES">
+            MESSAGES
+          </th>
+        </tr>
+        
+        <tr>
+          <td>
+            
+            <table class="table table-bordered table-striped">
+              <tr>
+                <td style="width: 80px;" class="table-primary">
+                  GET
+                </td>
+                <td>
+                  PAGINATE
+                </td>
+              </tr>
+              
+              <tr>
+                <td colspan="2">
+                  http://127.0.0.1:5098/messages
+                </td>
+              </tr>
+              
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Headers
+                  </th>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <table class="table table-bordered">
+                      <tr>
+                        <th>
+                          Name
+                        </th>
+                        <th>
+                          Type
+                        </th>
+                        <th>
+                          Description
+                        </th>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          Authorization
+                          
+                          <font color="red">* (required)</font>
+                              
+                        </td>
+                        <td>
+                          String
+                        </td>
+                        <td>
+                          The user token
+                        </td>
+                      </tr>
+                      
+                    </table>
+                  </td>
+                </tr>
+              
+              
+              
+              
+                
+                <tr>
+                  <td colspan="2">
+                    <strong>Response example</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <pre>{
+  &#34;data&#34;: [
+    {
+      &#34;type&#34;: &#34;messages&#34;,
+      &#34;id&#34;: &#34;5b9d25dd2be61559c6486ee3&#34;,
+      &#34;attributes&#34;: {
+        &#34;_id&#34;: &#34;5b9d25dd2be61559c6486ee3&#34;,
+        &#34;sender&#34;: {
+          &#34;picture&#34;: null,
+          &#34;_id&#34;: &#34;5b9d23422be61559c6486ee1&#34;,
+          &#34;name&#34;: &#34;User 1&#34;,
+          &#34;email&#34;: &#34;user1@gmail.com&#34;,
+          &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+          &#34;created_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+          &#34;updated_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+          &#34;__v&#34;: 0
+        },
+        &#34;receiver&#34;: {
+          &#34;picture&#34;: null,
+          &#34;_id&#34;: &#34;5b9d234d2be61559c6486ee2&#34;,
+          &#34;name&#34;: &#34;User 2&#34;,
+          &#34;email&#34;: &#34;user2@gmail.com&#34;,
+          &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+          &#34;created_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+          &#34;updated_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+          &#34;__v&#34;: 0
+        },
+        &#34;content&#34;: &#34;TEST MESSAGE 1&#34;,
+        &#34;created_at&#34;: &#34;2018-09-15T15:31:41.313Z&#34;,
+        &#34;updated_at&#34;: &#34;2018-09-15T15:31:41.313Z&#34;,
+        &#34;__v&#34;: 0
+      }
+    },
+    {
+      &#34;type&#34;: &#34;messages&#34;,
+      &#34;id&#34;: &#34;5b9d25e22be61559c6486ee4&#34;,
+      &#34;attributes&#34;: {
+        &#34;_id&#34;: &#34;5b9d25e22be61559c6486ee4&#34;,
+        &#34;sender&#34;: {
+          &#34;picture&#34;: null,
+          &#34;_id&#34;: &#34;5b9d23422be61559c6486ee1&#34;,
+          &#34;name&#34;: &#34;User 1&#34;,
+          &#34;email&#34;: &#34;user1@gmail.com&#34;,
+          &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+          &#34;created_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+          &#34;updated_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+          &#34;__v&#34;: 0
+        },
+        &#34;receiver&#34;: {
+          &#34;picture&#34;: null,
+          &#34;_id&#34;: &#34;5b9d234d2be61559c6486ee2&#34;,
+          &#34;name&#34;: &#34;User 2&#34;,
+          &#34;email&#34;: &#34;user2@gmail.com&#34;,
+          &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+          &#34;created_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+          &#34;updated_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+          &#34;__v&#34;: 0
+        },
+        &#34;content&#34;: &#34;TEST MESSAGE2&#34;,
+        &#34;created_at&#34;: &#34;2018-09-15T15:31:46.780Z&#34;,
+        &#34;updated_at&#34;: &#34;2018-09-15T15:31:46.780Z&#34;,
+        &#34;__v&#34;: 0
+      }
+    },
+    {
+      &#34;type&#34;: &#34;messages&#34;,
+      &#34;id&#34;: &#34;5b9d25e82be61559c6486ee5&#34;,
+      &#34;attributes&#34;: {
+        &#34;_id&#34;: &#34;5b9d25e82be61559c6486ee5&#34;,
+        &#34;sender&#34;: {
+          &#34;picture&#34;: null,
+          &#34;_id&#34;: &#34;5b9d23422be61559c6486ee1&#34;,
+          &#34;name&#34;: &#34;User 1&#34;,
+          &#34;email&#34;: &#34;user1@gmail.com&#34;,
+          &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+          &#34;created_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+          &#34;updated_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+          &#34;__v&#34;: 0
+        },
+        &#34;receiver&#34;: {
+          &#34;picture&#34;: null,
+          &#34;_id&#34;: &#34;5b9d234d2be61559c6486ee2&#34;,
+          &#34;name&#34;: &#34;User 2&#34;,
+          &#34;email&#34;: &#34;user2@gmail.com&#34;,
+          &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+          &#34;created_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+          &#34;updated_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+          &#34;__v&#34;: 0
+        },
+        &#34;content&#34;: &#34;TEST MESSAGE2&#34;,
+        &#34;created_at&#34;: &#34;2018-09-15T15:31:52.919Z&#34;,
+        &#34;updated_at&#34;: &#34;2018-09-15T15:31:52.919Z&#34;,
+        &#34;__v&#34;: 0
+      }
+    }
+  ]
+}</pre>              
+                  </td>
+                </tr>
+                
+              
+            </table>
+            
+            <table class="table table-bordered table-striped">
+              <tr>
+                <td style="width: 80px;" class="table-primary">
+                  GET
+                </td>
+                <td>
+                  READ
+                </td>
+              </tr>
+              
+              <tr>
+                <td colspan="2">
+                  http://127.0.0.1:5098/messages/id
+                </td>
+              </tr>
+              
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Headers
+                  </th>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <table class="table table-bordered">
+                      <tr>
+                        <th>
+                          Name
+                        </th>
+                        <th>
+                          Type
+                        </th>
+                        <th>
+                          Description
+                        </th>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          Authorization
+                          
+                          <font color="red">* (required)</font>
+                              
+                        </td>
+                        <td>
+                          String
+                        </td>
+                        <td>
+                          The user token
+                        </td>
+                      </tr>
+                      
+                    </table>
+                  </td>
+                </tr>
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Body
+                  </th>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <table class="table table-bordered">
+                      <tr>
+                        <th>
+                          Name
+                        </th>
+                        <th>
+                          Type
+                        </th>
+                        <th>
+                          Description
+                        </th>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          id
+                          
+                          <font color="red">*</font>
+                              
+                        </td>
+                        <td>
+                          String
+                        </td>
+                        <td>
+                          The file id
+                        </td>
+                      </tr>
+                      
+                    </table>
+                  </td>
+                </tr>
+              
+              
+              
+                
+                <tr>
+                  <td colspan="2">
+                    <strong>Response example</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <pre>{
+  &#34;data&#34;: {
+    &#34;type&#34;: &#34;messages&#34;,
+    &#34;id&#34;: &#34;5b9d25dd2be61559c6486ee3&#34;,
+    &#34;attributes&#34;: {
+      &#34;_id&#34;: &#34;5b9d25dd2be61559c6486ee3&#34;,
+      &#34;sender&#34;: {
+        &#34;picture&#34;: null,
+        &#34;_id&#34;: &#34;5b9d23422be61559c6486ee1&#34;,
+        &#34;name&#34;: &#34;User 1&#34;,
+        &#34;email&#34;: &#34;user1@gmail.com&#34;,
+        &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+        &#34;created_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+        &#34;updated_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+        &#34;__v&#34;: 0
+      },
+      &#34;receiver&#34;: {
+        &#34;picture&#34;: null,
+        &#34;_id&#34;: &#34;5b9d234d2be61559c6486ee2&#34;,
+        &#34;name&#34;: &#34;User 2&#34;,
+        &#34;email&#34;: &#34;user2@gmail.com&#34;,
+        &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+        &#34;created_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+        &#34;updated_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+        &#34;__v&#34;: 0
+      },
+      &#34;content&#34;: &#34;TEST MESSAGE 1&#34;,
+      &#34;created_at&#34;: &#34;2018-09-15T15:31:41.313Z&#34;,
+      &#34;updated_at&#34;: &#34;2018-09-15T15:31:41.313Z&#34;,
+      &#34;__v&#34;: 0
+    }
+  }
+}</pre>              
+                  </td>
+                </tr>
+                
+              
+            </table>
+            
+            <table class="table table-bordered table-striped">
+              <tr>
+                <td style="width: 80px;" class="table-warning">
+                  POST
+                </td>
+                <td>
+                  CREATE
+                </td>
+              </tr>
+              
+              <tr>
+                <td colspan="2">
+                  http://127.0.0.1:5098/messages
+                </td>
+              </tr>
+              
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Headers
+                  </th>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <table class="table table-bordered">
+                      <tr>
+                        <th>
+                          Name
+                        </th>
+                        <th>
+                          Type
+                        </th>
+                        <th>
+                          Description
+                        </th>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          Authorization
+                          
+                          <font color="red">* (required)</font>
+                              
+                        </td>
+                        <td>
+                          String
+                        </td>
+                        <td>
+                          The user token
+                        </td>
+                      </tr>
+                      
+                    </table>
+                  </td>
+                </tr>
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Body
+                  </th>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <table class="table table-bordered">
+                      <tr>
+                        <th>
+                          Name
+                        </th>
+                        <th>
+                          Type
+                        </th>
+                        <th>
+                          Description
+                        </th>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          sender
+                          
+                          <font color="red">*</font>
+                              
+                        </td>
+                        <td>
+                          String
+                        </td>
+                        <td>
+                          The sender id
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          receiver
+                          
+                          <font color="red">*</font>
+                              
+                        </td>
+                        <td>
+                          String
+                        </td>
+                        <td>
+                          The receiver id
+                        </td>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          content
+                          
+                          <font color="red">*</font>
+                              
+                        </td>
+                        <td>
+                          String
+                        </td>
+                        <td>
+                          The message content
+                        </td>
+                      </tr>
+                      
+                    </table>
+                  </td>
+                </tr>
+              
+              
+              
+                
+                <tr>
+                  <td colspan="2">
+                    <strong>Response example</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <pre>{
+  &#34;data&#34;: {
+    &#34;type&#34;: &#34;messages&#34;,
+    &#34;id&#34;: &#34;5b9d25dd2be61559c6486ee3&#34;,
+    &#34;attributes&#34;: {
+      &#34;_id&#34;: &#34;5b9d25dd2be61559c6486ee3&#34;,
+      &#34;sender&#34;: {
+        &#34;picture&#34;: null,
+        &#34;_id&#34;: &#34;5b9d23422be61559c6486ee1&#34;,
+        &#34;name&#34;: &#34;User 1&#34;,
+        &#34;email&#34;: &#34;user1@gmail.com&#34;,
+        &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+        &#34;created_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+        &#34;updated_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+        &#34;__v&#34;: 0
+      },
+      &#34;receiver&#34;: {
+        &#34;picture&#34;: null,
+        &#34;_id&#34;: &#34;5b9d234d2be61559c6486ee2&#34;,
+        &#34;name&#34;: &#34;User 2&#34;,
+        &#34;email&#34;: &#34;user2@gmail.com&#34;,
+        &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+        &#34;created_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+        &#34;updated_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+        &#34;__v&#34;: 0
+      },
+      &#34;content&#34;: &#34;TEST MESSAGE 1&#34;,
+      &#34;created_at&#34;: &#34;2018-09-15T15:31:41.313Z&#34;,
+      &#34;updated_at&#34;: &#34;2018-09-15T15:31:41.313Z&#34;,
+      &#34;__v&#34;: 0
+    }
+  }
+}</pre>              
+                  </td>
+                </tr>
+                
+              
+            </table>
+            
+            <table class="table table-bordered table-striped">
+              <tr>
+                <td style="width: 80px;" class="table-danger">
+                  DELETE
+                </td>
+                <td>
+                  DELETE
+                </td>
+              </tr>
+              
+              <tr>
+                <td colspan="2">
+                  http://127.0.0.1:5098/messages/id
+                </td>
+              </tr>
+              
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Headers
+                  </th>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <table class="table table-bordered">
+                      <tr>
+                        <th>
+                          Name
+                        </th>
+                        <th>
+                          Type
+                        </th>
+                        <th>
+                          Description
+                        </th>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          Authorization
+                          
+                          <font color="red">* (required)</font>
+                              
+                        </td>
+                        <td>
+                          String
+                        </td>
+                        <td>
+                          The user token
+                        </td>
+                      </tr>
+                      
+                    </table>
+                  </td>
+                </tr>
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Body
+                  </th>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <table class="table table-bordered">
+                      <tr>
+                        <th>
+                          Name
+                        </th>
+                        <th>
+                          Type
+                        </th>
+                        <th>
+                          Description
+                        </th>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          id
+                          
+                          <font color="red">*</font>
+                              
+                        </td>
+                        <td>
+                          String
+                        </td>
+                        <td>
+                          The message id
+                        </td>
+                      </tr>
+                      
+                    </table>
+                  </td>
+                </tr>
+              
+              
+              
+                
+                <tr>
+                  <td colspan="2">
+                    <strong>Response example</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <pre>{
+  &#34;data&#34;: {
+    &#34;type&#34;: &#34;messages&#34;,
+    &#34;id&#34;: &#34;5b9d25dd2be61559c6486ee3&#34;,
+    &#34;attributes&#34;: {
+      &#34;_id&#34;: &#34;5b9d25dd2be61559c6486ee3&#34;,
+      &#34;sender&#34;: {
+        &#34;picture&#34;: null,
+        &#34;_id&#34;: &#34;5b9d23422be61559c6486ee1&#34;,
+        &#34;name&#34;: &#34;User 1&#34;,
+        &#34;email&#34;: &#34;user1@gmail.com&#34;,
+        &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+        &#34;created_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+        &#34;updated_at&#34;: &#34;2018-09-15T15:20:34.301Z&#34;,
+        &#34;__v&#34;: 0
+      },
+      &#34;receiver&#34;: {
+        &#34;picture&#34;: null,
+        &#34;_id&#34;: &#34;5b9d234d2be61559c6486ee2&#34;,
+        &#34;name&#34;: &#34;User 2&#34;,
+        &#34;email&#34;: &#34;user2@gmail.com&#34;,
+        &#34;password&#34;: &#34;5ebe2294ecd0e0f08eab7690d2a6ee69&#34;,
+        &#34;created_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+        &#34;updated_at&#34;: &#34;2018-09-15T15:20:45.484Z&#34;,
+        &#34;__v&#34;: 0
+      },
+      &#34;content&#34;: &#34;TEST MESSAGE 1&#34;,
+      &#34;created_at&#34;: &#34;2018-09-15T15:31:41.313Z&#34;,
+      &#34;updated_at&#34;: &#34;2018-09-15T15:31:41.313Z&#34;,
+      &#34;__v&#34;: 0
+    }
+  }
+}</pre>              
+                  </td>
+                </tr>
+                
+              
+            </table>
+            
+          </td>
+        </tr>
+      </table>
+      
+      <table class="table table-bordered">
+        
+        <tr>
+          <th id="SOCKET.IO">
+            SOCKET.IO
+          </th>
+        </tr>
+        
+        <tr>
+          <td>
+            
+            <table class="table table-bordered table-striped">
+              <tr>
+                <td style="width: 80px;" class="">
+                  CONNECT
+                </td>
+                <td>
+                  
+                </td>
+              </tr>
+              
+              <tr>
+                <td colspan="2">
+                  http://127.0.0.1:5098/
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td colspan="2">
+                Connection without a valid user token is dropped by immediatly disconnect.
+                </td>
+              </tr>
+              
+              
+              
+              
+                <tr>
+                  <th colspan="2">
+                    Handshake Query
+                  </th>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <table class="table table-bordered">
+                      <tr>
+                        <th>
+                          Name
+                        </th>
+                        <th>
+                          Type
+                        </th>
+                        <th>
+                          Description
+                        </th>
+                      </tr>
+                      
+                      <tr>
+                        <td>
+                          token
+                          
+                          <font color="red">*</font>
+                              
+                        </td>
+                        <td>
+                          String
+                        </td>
+                        <td>
+                          The user token
+                        </td>
+                      </tr>
+                      
+                    </table>
+                  </td>
+                </tr>
+              
+              
+            </table>
+            
+            <table class="table table-bordered table-striped">
+              <tr>
+                <td style="width: 80px;" class="">
+                  LISTEN
+                </td>
+                <td>
+                  *
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td colspan="2">
+                Received events with name auth.login mean that connection is successful.
+                </td>
+              </tr>
+              
+              
+              
+              
+              
+                
+                <tr>
+                  <td colspan="2">
+                    <strong>Payload</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <pre>{
+  &#34;name&#34;: &#34;auth.login&#34;,
+  &#34;status&#34;: 200,
+  &#34;data&#34;: {
+    &#34;type&#34;: &#34;users&#34;,
+    &#34;id&#34;: &#34;5b9d3beb2211027f50eeb64b&#34;,
+    &#34;attributes&#34;: {
+      &#34;picture&#34;: null,
+      &#34;_id&#34;: &#34;5b9d3beb2211027f50eeb64b&#34;,
+      &#34;name&#34;: &#34;Chet McLaughlin V&#34;,
+      &#34;email&#34;: &#34;Johann.Gutkowski54@gmail.com&#34;,
+      &#34;created_at&#34;: &#34;2018-09-15T17:05:47.440Z&#34;,
+      &#34;updated_at&#34;: &#34;2018-09-15T17:05:47.440Z&#34;,
+      &#34;iat&#34;: 1537031147,
+      &#34;exp&#34;: 1568567147
+    }
+  }
+}</pre>              
+                  </td>
+                </tr>
+                
+              
+            </table>
+            
+            <table class="table table-bordered table-striped">
+              <tr>
+                <td style="width: 80px;" class="">
+                  LISTEN
+                </td>
+                <td>
+                  *
+                </td>
+              </tr>
+              
+              
+              <tr>
+                <td colspan="2">
+                Received events with name messages.create mean that the connected user has received a new message.
+                </td>
+              </tr>
+              
+              
+              
+              
+              
+                
+                <tr>
+                  <td colspan="2">
+                    <strong>Payload</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <pre>{
+  &#34;name&#34;: &#34;messages.create&#34;,
+  &#34;status&#34;: 200,
+  &#34;data&#34;: {
+    &#34;type&#34;: &#34;messages&#34;,
+    &#34;id&#34;: &#34;5b9d3dd1c9c37305dacac0de&#34;,
+    &#34;attributes&#34;: {
+      &#34;_id&#34;: &#34;5b9d3dd1c9c37305dacac0de&#34;,
+      &#34;sender&#34;: &#34;5b9d3dd1c9c37305dacac0db&#34;,
+      &#34;receiver&#34;: &#34;5b9d3dd1c9c37305dacac0dc&#34;,
+      &#34;content&#34;: &#34;Aliquid debitis deserunt sit.&#34;,
+      &#34;created_at&#34;: &#34;2018-09-15T17:13:53.449Z&#34;,
+      &#34;updated_at&#34;: &#34;2018-09-15T17:13:53.449Z&#34;,
+      &#34;__v&#34;: 0
+    }
+  }
+}</pre>              
+                  </td>
+                </tr>
+                
+              
+            </table>
+            
+          </td>
+        </tr>
+      </table>
+      
+      
+
+    </main><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
