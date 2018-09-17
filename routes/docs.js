@@ -616,6 +616,134 @@ router.get('/', function (req, res, next) {
         ]
       },
       {
+        name: 'USERS',
+        endpoints: [
+          {
+            name: 'PAGINATE',
+            url: '/users/:id/messages',
+            method: 'GET',
+            headers: [
+              {
+                name: 'Authorization',
+                type: 'String',
+                description: 'The user token',
+                required: true
+              }
+            ],
+            params: [
+              {
+                name: 'id',
+                type: 'String',
+                description: 'The users id',
+                required: true
+              }
+            ],
+            responses: [
+              {
+                name: 'Response example',
+                value: {
+                  "data":[
+                    {
+                      "type":"messages",
+                      "id":"5b9d25dd2be61559c6486ee3",
+                      "attributes":{
+                        "_id":"5b9d25dd2be61559c6486ee3",
+                        "sender":{
+                          "picture":null,
+                          "_id":"5b9d23422be61559c6486ee1",
+                          "name":"User 1",
+                          "email":"user1@gmail.com",
+                          "password":"5ebe2294ecd0e0f08eab7690d2a6ee69",
+                          "created_at":"2018-09-15T15:20:34.301Z",
+                          "updated_at":"2018-09-15T15:20:34.301Z",
+                          "__v":0
+                        },
+                        "receiver":{
+                          "picture":null,
+                          "_id":"5b9d234d2be61559c6486ee2",
+                          "name":"User 2",
+                          "email":"user2@gmail.com",
+                          "password":"5ebe2294ecd0e0f08eab7690d2a6ee69",
+                          "created_at":"2018-09-15T15:20:45.484Z",
+                          "updated_at":"2018-09-15T15:20:45.484Z",
+                          "__v":0
+                        },
+                        "content":"TEST MESSAGE 1",
+                        "created_at":"2018-09-15T15:31:41.313Z",
+                        "updated_at":"2018-09-15T15:31:41.313Z",
+                        "__v":0
+                      }
+                    },
+                    {
+                      "type":"messages",
+                      "id":"5b9d25e22be61559c6486ee4",
+                      "attributes":{
+                        "_id":"5b9d25e22be61559c6486ee4",
+                        "sender":{
+                          "picture":null,
+                          "_id":"5b9d23422be61559c6486ee1",
+                          "name":"User 1",
+                          "email":"user1@gmail.com",
+                          "password":"5ebe2294ecd0e0f08eab7690d2a6ee69",
+                          "created_at":"2018-09-15T15:20:34.301Z",
+                          "updated_at":"2018-09-15T15:20:34.301Z",
+                          "__v":0
+                        },
+                        "receiver":{
+                          "picture":null,
+                          "_id":"5b9d234d2be61559c6486ee2",
+                          "name":"User 2",
+                          "email":"user2@gmail.com",
+                          "password":"5ebe2294ecd0e0f08eab7690d2a6ee69",
+                          "created_at":"2018-09-15T15:20:45.484Z",
+                          "updated_at":"2018-09-15T15:20:45.484Z",
+                          "__v":0
+                        },
+                        "content":"TEST MESSAGE2",
+                        "created_at":"2018-09-15T15:31:46.780Z",
+                        "updated_at":"2018-09-15T15:31:46.780Z",
+                        "__v":0
+                      }
+                    },
+                    {
+                      "type":"messages",
+                      "id":"5b9d25e82be61559c6486ee5",
+                      "attributes":{
+                        "_id":"5b9d25e82be61559c6486ee5",
+                        "sender":{
+                          "picture":null,
+                          "_id":"5b9d23422be61559c6486ee1",
+                          "name":"User 1",
+                          "email":"user1@gmail.com",
+                          "password":"5ebe2294ecd0e0f08eab7690d2a6ee69",
+                          "created_at":"2018-09-15T15:20:34.301Z",
+                          "updated_at":"2018-09-15T15:20:34.301Z",
+                          "__v":0
+                        },
+                        "receiver":{
+                          "picture":null,
+                          "_id":"5b9d234d2be61559c6486ee2",
+                          "name":"User 2",
+                          "email":"user2@gmail.com",
+                          "password":"5ebe2294ecd0e0f08eab7690d2a6ee69",
+                          "created_at":"2018-09-15T15:20:45.484Z",
+                          "updated_at":"2018-09-15T15:20:45.484Z",
+                          "__v":0
+                        },
+                        "content":"TEST MESSAGE2",
+                        "created_at":"2018-09-15T15:31:52.919Z",
+                        "updated_at":"2018-09-15T15:31:52.919Z",
+                        "__v":0
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
         name: 'SOCKET.IO',
         endpoints: [
           {
