@@ -10,7 +10,7 @@ const fileModel = require('../models/files.js')
 router.get('/', function (req, res, next) {
   fileModel
     .find({})
-    .sort({ _id: 1 })
+    .sort({ _id: -1 })
     .skip(((req.query.page || 1) * 10) - 10)
     .limit(10)
     .exec(function (err, files) {

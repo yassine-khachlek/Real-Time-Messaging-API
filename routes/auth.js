@@ -13,7 +13,6 @@ router.post('/register', function (req, res, next) {
     picture: req.body.picture ? new ObjectId(req.body.picture) : null,
     password: req.body.password ? crypto.createHash('md5').update(req.body.password).digest('hex') : null
   }
-
   userModel.create(userData, function (err, user) {
     if (err) {
       return res.status(500).send({
