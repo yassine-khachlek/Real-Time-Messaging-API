@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const ObjectId = require('mongodb').ObjectID
 const messageModel = require('../models/messages.js')
+const userModel = require('../models/users.js')
 const auth = require('../middlewares/auth.js')
 
 router.use(auth.check)
@@ -110,36 +111,94 @@ router.post('/', function (req, res, next) {
     content: req.body.content
   }
 
-  messageModel.create(messageData, function (err, message) {
-    if (err) {
-      return res.status(500).send({
-        errors: [
-          {
-            status: 500,
-            title: 'Internal Server Error'
+  userModel
+    .findById(new ObjectId(req.body.sender))
+    .exec(function (err, sender) {
+      if (err) {
+        return res.status(500).send({
+          errors: [
+            {
+              status: 500,
+              title: 'Internal Server Error'
+            }
+          ]
+        })
+      }
+
+      if (!sender) {
+        return res.status(400).send({
+          errors: [
+            {
+              status: 400,
+              title: 'Bad Request'
+            }
+          ]
+        })
+      }
+
+      userModel
+        .findById(new ObjectId(req.body.receiver))
+        .exec(function (err, receiver) {
+          if (err) {
+            return res.status(500).send({
+              errors: [
+                {
+                  status: 500,
+                  title: 'Internal Server Error'
+                }
+              ]
+            })
           }
-        ]
-      })
-    }
 
-    req.app.get('io').to(messageData.receiver).emit('*', {
-      name: 'messages.create',
-      status: 200,
-      data: {
-        type: 'messages',
-        id: message._id,
-        attributes: message
-      }
+          if (!receiver) {
+            return res.status(400).send({
+              errors: [
+                {
+                  status: 400,
+                  title: 'Bad Request'
+                }
+              ]
+            })
+          }
+
+          messageModel.create(messageData, function (err, message) {
+            if (err) {
+              return res.status(500).send({
+                errors: [
+                  {
+                    status: 500,
+                    title: 'Internal Server Error'
+                  }
+                ]
+              })
+            }
+
+            req.app.get('io').to(messageData.receiver).emit('*', {
+              name: 'messages.create',
+              status: 200,
+              data: {
+                type: 'messages',
+                id: message._id,
+                attributes: message
+              }
+            })
+
+            message.sender = sender;
+            message.receiver = receiver;
+
+            return res.json({
+              data: {
+                type: 'messages',
+                id: message._id,
+                attributes: message
+              }
+            })
+          })
+
+        })
+
     })
 
-    return res.json({
-      data: {
-        type: 'messages',
-        id: message._id,
-        attributes: message
-      }
-    })
-  })
 })
 
 /* DELETE message */
