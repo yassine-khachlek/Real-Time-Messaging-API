@@ -18,7 +18,7 @@ router.get('/', function (req, res, next) {
 
   const sortQuery = (req.query.sort ? req.query.sort : '_id:asc').split(':');
   const sortKey = sortQuery[0] ? sortQuery[0] : '_id';
-  const sortValue = (sortQuery[1] && sortQuery[1] == 'asc') ? 1 : -1;
+  const sortValue = (sortQuery[1] && sortQuery[1] != 'asc') ? -1 : 1;
   var sort = {};
   sort[sortKey] = sortValue
 

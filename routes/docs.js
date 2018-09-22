@@ -343,7 +343,7 @@ router.get('/', function (req, res, next) {
               {
                 name: 'sort',
                 type: 'String',
-                description: 'Sorting order example: created_at:asc (Default is: _id:desc)',
+                description: 'Sorting order example: created_at:asc (Default is: _id:asc)',
                 required: false
               }
             ],
