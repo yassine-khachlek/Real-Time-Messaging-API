@@ -311,7 +311,7 @@ router.get('/', function (req, res, next) {
         endpoints: [
           {
             name: 'PAGINATE',
-            url: '/messages',
+            url: '/messages?search={"_id":"5ba66d2585b2266f750bc574"}&page=1&limit=10&sort=created_at:desc',
             method: 'GET',
             headers: [
               {
@@ -319,6 +319,32 @@ router.get('/', function (req, res, next) {
                 type: 'String',
                 description: 'The user token',
                 required: true
+              }
+            ],
+            params: [
+              {
+                name: 'search',
+                type: 'JSON string',
+                description: 'Example: {"_id":"5ba66d2585b2266f750bc574"}',
+                required: false
+              },
+              {
+                name: 'page',
+                type: 'Number',
+                description: 'The page number (Default 1)',
+                required: false
+              },
+              {
+                name: 'limit',
+                type: 'Number',
+                description: 'The number of items returned, max 10',
+                required: false
+              },
+              {
+                name: 'sort',
+                type: 'String',
+                description: 'Sorting order example: created_at:asc (Default is: _id:desc)',
+                required: false
               }
             ],
             responses: [

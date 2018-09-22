@@ -8,12 +8,25 @@ router.use(auth.check)
 
 /* GET messages */
 router.get('/', function (req, res, next) {
+  const search = req.query.search ? JSON.parse(req.query.search) : {};
+
+  const page = parseInt(req.query.page) || 1;
+
+  const limitQuery = parseInt(req.query.limit);
+  var limit = (limitQuery > 0 && limitQuery < 10) ? limitQuery : 10;
+
+  const sortQuery = (req.query.sort ? req.query.sort : '_id:asc').split(':');
+  const sortKey = sortQuery[0] ? sortQuery[0] : '_id';
+  const sortValue = (sortQuery[1] && sortQuery[1] == 'asc') ? 1 : -1;
+  var sort = {};
+  sort[sortKey] = sortValue
+
   messageModel
-    .find({})
+    .find(search)
     .populate(['sender', 'receiver'])
-    .sort({ created_at: -1 })
-    .skip(((req.query.page || 1) * 10) - 10)
-    .limit(10)
+    .sort(sort)
+    .skip((page * limit) - limit)
+    .limit(limit)
     .exec(function (err, messages) {
       if (err) {
         return res.status(500).send({
